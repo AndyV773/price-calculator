@@ -11,15 +11,16 @@
         font-style: italic;
         font-size: 18px;
       }
+      h2 {
+        text-align: center;
+      }
       .t {
         text-decoration: underline;
         font-weight: 700;
         font-size: 20px;
       }
-      .fb {
-        display: flex;
-        flex-flow: column;
-        align-items: center;
+      .ma {
+        margin: auto;
       }
       .m {
         margin: 5px 0;
@@ -35,6 +36,7 @@
         border-radius: 5px;
         background-color: #fefefe;
         box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.6);
+        max-width: 400px;
       }
       .p60 {
         padding: 10px 60px 60px 60px;
@@ -71,251 +73,253 @@
       }
     </style>
   </head>
-  <body class="fb">
-    <h1 class="m">Price Calculator</h1>
-    <form id="price-estimator" class="f">
-      <!-- dimensions -->
-      <p class="t">Room Size</p>
-      <div class="sb">
-        <label for="length">Length (m)</label
-        ><input
-          class="maxw60"
-          type="number"
-          id="length"
-          name="length"
-          min="0"
-          value="2"
-          required
-        />
-      </div>
-      <div class="sb">
-        <label for="width">Width (m)</label
-        ><input
-          class="maxw60"
-          type="number"
-          id="width"
-          name="width"
-          min="0"
-          value="2"
-          required
-        />
-      </div>
-      <div class="sb mb">
-        <label for="height">Height (m)</label>
-        <input
-          class="maxw60"
-          type="number"
-          id="height"
-          name="height"
-          min="0"
-          value="2"
-          required
-        />
-      </div>
-      <!-- service type options -->
-      <label class="bold" for="service">Select Service</label>
-      <br />
-      <select class="maxw100" name="service" id="service" required>
-        <option value="room" selected>Full Room</option>
-        <option value="walls">Walls Only</option>
-        <option value="ceiling">Ceiling Only</option>
-        <option value="woodwork">Woodwork Only</option>
-      </select>
-      <br />
-      <!-- condition type options -->
-      <label class="bold" for="condition">Condition</label>
-      <br />
-      <select class="maxw100" name="condition" id="condition" required>
-        <option value="good" selected>Good</option>
-        <option value="average">Average</option>
-        <option value="bad">Bad</option>
-      </select>
-      <br />
-      <!-- finish type options -->
-      <label class="bold" for="finish">Finish</label>
-      <br />
-      <select class="maxw100" name="finish" id="finish" required>
-        <option value="hand" selected>Hand Painted</option>
-        <option value="spray">Spray Painted</option>
-        <option value="wallpaper">Wallpaper</option>
-      </select>
-      <br />
-      <!-- floor type options -->
-      <p class="m">Floor protection required</p>
-      <label>
-        <input type="checkbox" name="floor" value="yes" />
-        Yes
-      </label>
-      <br />
-      <!-- wallpaper type options -->
-      <p class="m">Wallpaper to be removed</p>
-      <label>
-        <input type="checkbox" name="paper" value="yes" />
-        Yes
-      </label>
-      <br />
-      <!-- plaster type options -->
-      <p class="m">Bare plaster</p>
-      <label>
-        <input type="checkbox" name="plaster" value="yes" />
-        Yes
-      </label>
-      <br />
-      <!-- wood type options -->
-      <p class="m">Bare wood</p>
-      <label>
-        <input type="checkbox" name="wood" value="yes" />
-        Yes
-      </label>
-      <br />
-      <!-- mould option -->
-      <p class="m">Mould</p>
-      <label>
-        <input type="checkbox" name="mould" value="yes" />
-        Yes
-      </label>
-      <p class="m mt bold">Enter Amount:</p>
-      <!-- number of doors -->
-      <div class="sb">
-        <label for="doors">Doors</label>
-        <input
-          class="maxw60"
-          type="number"
-          id="doors"
-          name="doors"
-          min="0"
-          value="0"
-          required
-        />
-      </div>
-      <!-- number of door frames -->
-      <div class="sb">
-        <label for="frames">Doorframes</label>
-        <input
-          class="maxw60"
-          type="number"
-          id="frames"
-          name="frames"
-          min="0"
-          value="0"
-          required
-        />
-      </div>
-      <!-- number of windows -->
-      <div class="sb">
-        <label for="doors">Windows</label>
-        <input
-          class="maxw60"
-          type="number"
-          id="windows"
-          name="windows"
-          min="0"
-          value="0"
-          required
-        />
-      </div>
-      <!-- number of window cills -->
-      <div class="sb">
-        <label for="doors">Window Cills</label>
-        <input
-          class="maxw60"
-          type="number"
-          id="cills"
-          name="cills"
-          min="0"
-          value="0"
-          required
-        />
-      </div>
-      <!-- number of radiators -->
-      <div class="sb">
-        <label for="doors">Radiators</label>
-        <input
-          class="maxw60"
-          type="number"
-          id="radiators"
-          name="radiators"
-          min="0"
-          value="0"
-          required
-        />
-      </div>
-      <!-- trims -->
-      <p class="m t">Trims</p>
-      <label>
-        <input type="checkbox" name="coving" value="coving" />
-        Coving
-      </label>
-      <br />
-      <label>
-        <input type="checkbox" name="picture" value="picture" />
-        Picture Rail
-      </label>
-      <br />
-      <label>
-        <input type="checkbox" name="dado" value="dado" />
-        Dado Rail
-      </label>
-      <br />
-      <p class="m t">Stairs</p>
-      <label>
-        <input
-          name="banister"
-          type="checkbox"
-          id="banisterCheckbox"
-          value="banister"
-          onchange="toggleBanisterOptions()"
-        />
-        Banister
-      </label>
-      <div id="banisterOptions" style="display: none; margin-top: 10px">
-        <p class="m bold">Enter Amount:</p>
+  <body>
+    <div>
+      <h2 class="m">Price Calculator</h2>
+      <form id="price-estimator" class="f ma">
+        <!-- dimensions -->
+        <p class="t">Room Size</p>
         <div class="sb">
-          <label class="minw80">Spindles</label>
+          <label for="length">Length (m)</label
+          ><input
+            class="maxw60"
+            type="number"
+            id="length"
+            name="length"
+            min="0"
+            value="2"
+            required
+          />
+        </div>
+        <div class="sb">
+          <label for="width">Width (m)</label
+          ><input
+            class="maxw60"
+            type="number"
+            id="width"
+            name="width"
+            min="0"
+            value="2"
+            required
+          />
+        </div>
+        <div class="sb mb">
+          <label for="height">Height (m)</label>
           <input
             class="maxw60"
             type="number"
-            id="spindles"
+            id="height"
+            name="height"
+            min="0"
+            value="2"
+            required
+          />
+        </div>
+        <!-- service type options -->
+        <label class="bold" for="service">Select Service</label>
+        <br />
+        <select class="maxw100" name="service" id="service" required>
+          <option value="room" selected>Full Room</option>
+          <option value="walls">Walls Only</option>
+          <option value="ceiling">Ceiling Only</option>
+          <option value="woodwork">Woodwork Only</option>
+        </select>
+        <br />
+        <!-- condition type options -->
+        <label class="bold" for="condition">Condition</label>
+        <br />
+        <select class="maxw100" name="condition" id="condition" required>
+          <option value="good" selected>Good</option>
+          <option value="average">Average</option>
+          <option value="bad">Bad</option>
+        </select>
+        <br />
+        <!-- finish type options -->
+        <label class="bold" for="finish">Finish</label>
+        <br />
+        <select class="maxw100" name="finish" id="finish" required>
+          <option value="hand" selected>Hand Painted</option>
+          <option value="spray">Spray Painted</option>
+          <option value="wallpaper">Wallpaper</option>
+        </select>
+        <br />
+        <!-- floor type options -->
+        <p class="m">Floor protection required</p>
+        <label>
+          <input type="checkbox" name="floor" value="yes" />
+          Yes
+        </label>
+        <br />
+        <!-- wallpaper type options -->
+        <p class="m">Wallpaper to be removed</p>
+        <label>
+          <input type="checkbox" name="paper" value="yes" />
+          Yes
+        </label>
+        <br />
+        <!-- plaster type options -->
+        <p class="m">Bare plaster</p>
+        <label>
+          <input type="checkbox" name="plaster" value="yes" />
+          Yes
+        </label>
+        <br />
+        <!-- wood type options -->
+        <p class="m">Bare wood</p>
+        <label>
+          <input type="checkbox" name="wood" value="yes" />
+          Yes
+        </label>
+        <br />
+        <!-- mould option -->
+        <p class="m">Mould</p>
+        <label>
+          <input type="checkbox" name="mould" value="yes" />
+          Yes
+        </label>
+        <p class="m mt bold">Enter Amount:</p>
+        <!-- number of doors -->
+        <div class="sb">
+          <label for="doors">Doors</label>
+          <input
+            class="maxw60"
+            type="number"
+            id="doors"
+            name="doors"
             min="0"
             value="0"
             required
           />
         </div>
+        <!-- number of door frames -->
         <div class="sb">
-          <label class="minw80">Newel Posts</label>
+          <label for="frames">Doorframes</label>
           <input
             class="maxw60"
             type="number"
-            id="newel-posts"
+            id="frames"
+            name="frames"
             min="0"
             value="0"
             required
           />
         </div>
+        <!-- number of windows -->
         <div class="sb">
-          <label>Handrail (m)</label>
+          <label for="doors">Windows</label>
           <input
             class="maxw60"
             type="number"
-            id="handrail"
+            id="windows"
+            name="windows"
             min="0"
             value="0"
             required
           />
         </div>
-      </div>
-      <!-- material option -->
-      <p class="m">Include materials</p>
-      <label>
-        <input type="checkbox" name="materials" value="yes" />
-        Yes
-      </label>
-      <br />
-      <!-- <p>Prices are inclusive of vat</p> -->
-      <div class="mt">Price: <span id="result"></span></div>
-      <div>Price Vat: <span id="result-vat"></span></div>
-      <button class="btn mt" type="submit">Estimate Price</button>
-    </form>
+        <!-- number of window cills -->
+        <div class="sb">
+          <label for="doors">Window Cills</label>
+          <input
+            class="maxw60"
+            type="number"
+            id="cills"
+            name="cills"
+            min="0"
+            value="0"
+            required
+          />
+        </div>
+        <!-- number of radiators -->
+        <div class="sb">
+          <label for="doors">Radiators</label>
+          <input
+            class="maxw60"
+            type="number"
+            id="radiators"
+            name="radiators"
+            min="0"
+            value="0"
+            required
+          />
+        </div>
+        <!-- trims -->
+        <p class="m t">Trims</p>
+        <label>
+          <input type="checkbox" name="coving" value="coving" />
+          Coving
+        </label>
+        <br />
+        <label>
+          <input type="checkbox" name="picture" value="picture" />
+          Picture Rail
+        </label>
+        <br />
+        <label>
+          <input type="checkbox" name="dado" value="dado" />
+          Dado Rail
+        </label>
+        <br />
+        <p class="m t">Stairs</p>
+        <label>
+          <input
+            name="banister"
+            type="checkbox"
+            id="banisterCheckbox"
+            value="banister"
+            onchange="toggleBanisterOptions()"
+          />
+          Banister
+        </label>
+        <div id="banisterOptions" style="display: none; margin-top: 10px">
+          <p class="m bold">Enter Amount:</p>
+          <div class="sb">
+            <label class="minw80">Spindles</label>
+            <input
+              class="maxw60"
+              type="number"
+              id="spindles"
+              min="0"
+              value="0"
+              required
+            />
+          </div>
+          <div class="sb">
+            <label class="minw80">Newel Posts</label>
+            <input
+              class="maxw60"
+              type="number"
+              id="newel-posts"
+              min="0"
+              value="0"
+              required
+            />
+          </div>
+          <div class="sb">
+            <label>Handrail (m)</label>
+            <input
+              class="maxw60"
+              type="number"
+              id="handrail"
+              min="0"
+              value="0"
+              required
+            />
+          </div>
+        </div>
+        <!-- material option -->
+        <p class="m">Include materials</p>
+        <label>
+          <input type="checkbox" name="materials" value="yes" />
+          Yes
+        </label>
+        <br />
+        <!-- <p>Prices are inclusive of vat</p> -->
+        <div class="mt">Price: <span id="result"></span></div>
+        <div>Price Vat: <span id="result-vat"></span></div>
+        <button class="btn mt" type="submit">Estimate Price</button>
+      </form>
+    </div>
     <script>
       document
         .getElementById("price-estimator")
@@ -553,14 +557,12 @@
 
           estimate = estimate < minCharge ? minCharge : estimate;
 
-          document.getElementById(
-            "result"
-          ).textContent = `£${estimate.toFixed(2)}`;
-          document.getElementById(
-            "result-vat"
-          ).textContent = `£${(estimate * vat).toFixed(
+          document.getElementById("result").textContent = `£${estimate.toFixed(
             2
           )}`;
+          document.getElementById("result-vat").textContent = `£${(
+            estimate * vat
+          ).toFixed(2)}`;
         });
       function toggleBanisterOptions() {
         const checkbox = document.getElementById("banisterCheckbox");
