@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Price Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+      h1 {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Price Calculator</h1>
+    <form id="price-estimator">
+      <h2>Job Details</h2>
+      <!-- dimensions -->
+      <p>Room Size</p>
+      <label for="length">Length (m):</label>
+      <br />
+      <input
+        type="number"
+        id="length"
+        name="length"
+        min="0"
+        value="0"
+        required
+      />
+      <br />
+      <label for="width">Width (m):</label>
+      <br />
+      <input type="number" id="width" name="width" min="0" value="0" required />
+      <br />
+      <label for="height">Height (m):</label>
+      <br />
+      <input
+        type="number"
+        id="height"
+        name="height"
+        min="0"
+        value="0"
+        required
+      />
+      <br />
+      <br />
+      <!-- service type options -->
+      <label for="service">Select Service:</label>
+      <br />
+      <select name="service" id="service" required>
+        <option value="room" selected>Full Room</option>
+        <option value="walls">Walls Only</option>
+        <option value="ceiling">Ceiling Only</option>
+        <option value="woodwork">Woodwork Only</option>
+      </select>
+      <br />
+      <br />
+      <!-- condition type options -->
+      <label for="condition">Condition:</label>
+      <br />
+      <select name="condition" id="condition" required>
+        <option value="good" selected>Good</option>
+        <option value="average">Average</option>
+        <option value="bad">Bad</option>
+      </select>
+      <br />
+      <br />
+      <!-- finish type options -->
+      <label for="finish">Finish:</label>
+      <br />
+      <select name="finish" id="finish" required>
+        <option value="hand" selected>Hand Painted</option>
+        <option value="spray">Spray Painted</option>
+        <option value="wallpaper">Wallpaper</option>
+      </select>
+      <br />
+      <!-- floor type options -->
+      <p>Floor protection required</p>
+      <label>
+        <input type="checkbox" name="floor" value="yes" />
+        Yes
+      </label>
+      <br />
+      <!-- wallpaper type options -->
+      <p>Wallpaper to be removed</p>
+      <label>
+        <input type="checkbox" name="paper" value="yes" />
+        Yes
+      </label>
+      <br />
+      <!-- plaster type options -->
+      <p>Bare plaster</p>
+      <label>
+        <input type="checkbox" name="plaster" value="yes" />
+        Yes
+      </label>
+      <br />
+      <!-- wood type options -->
+      <p>Bare wood</p>
+      <label>
+        <input type="checkbox" name="wood" value="yes" />
+        Yes
+      </label>
+      <br />
+      <!-- mould option -->
+      <p>Mould</p>
+      <label>
+        <input type="checkbox" name="mould" value="yes" />
+        Yes
+      </label>
+      <br />
+      <br />
+      <!-- number of doors -->
+      <label for="doors">Number of Doors:</label>
+      <br />
+      <input type="number" id="doors" name="doors" min="0" value="0" required />
+      <br />
+      <!-- number of windows -->
+      <label for="doors">Number of Windows:</label>
+      <br />
+      <input
+        type="number"
+        id="windows"
+        name="windows"
+        min="0"
+        value="0"
+        required
+      />
+      <br />
+      <!-- number of window cills -->
+      <label for="doors">Number of Window Cills:</label>
+      <br />
+      <input type="number" id="cills" name="cills" min="0" value="0" required />
+      <br />
+      <!-- number of radiators -->
+      <label for="doors">Number of radiators:</label>
+      <br />
+      <input
+        type="number"
+        id="radiators"
+        name="radiators"
+        min="0"
+        value="0"
+        required
+      />
+      <br />
+      <!-- trims -->
+      <p>Trims</p>
+      <label>
+        <input type="checkbox" name="trims" value="coving" />
+        Coving
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="trims" value="rail" />
+        Picture Rail
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="trims" value="dado" />
+        Dado Rail
+      </label>
+      <br />
+      <br />
+      <!-- <p>Prices are inclusive of vat</p> -->
+      <div id="result"></div>
+      <div id="result-vat"></div>
+      <button type="submit">Estimate Price</button>
+    </form>
+    <script>
+      document
+        .getElementById("price-estimator")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent the default form submission
+          // price values
+          const doorPrice = 30;
+          const windowPrice = 40;
+          const cillsPrice = 10;
+          const radiatorPrice = 15;
+          const vat = 1.2;
+          // Retrieve values from the form
+          const length = parseFloat(document.getElementById("length").value);
+          const width = parseFloat(document.getElementById("width").value);
+          const height = parseFloat(document.getElementById("height").value);
+          const doors = parseInt(document.getElementById("doors").value);
+          const windows = parseInt(document.getElementById("windows").value);
+          const radiators = parseInt(
+            document.getElementById("radiators").value
+          );
+          const cills = parseInt(document.getElementById("cills").value);
+          let estimate = 0;
+          estimate += doors * doorPrice;
+          estimate += windows * windowPrice;
+          estimate += cills * cillsPrice;
+          estimate += radiators * radiatorPrice;
+          document.getElementById(
+            "result"
+          ).textContent = `Estimated Price: £${estimate.toFixed(2)}`;
+          document.getElementById(
+            "result-vat"
+          ).textContent = `Estimated Price vat: £${(estimate * vat).toFixed(
+            2
+          )}`;
+        });
+    </script>
+  </body>
+</html>
