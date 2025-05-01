@@ -9,7 +9,8 @@
         font-family: Arial, sans-serif;
         background-color: #e6e6e6;
         font-style: italic;
-        font-size: 18px;
+        font-size: 20px;
+        color: black;
       }
       h2 {
         text-align: center;
@@ -17,7 +18,7 @@
       .t {
         text-decoration: underline;
         font-weight: 700;
-        font-size: 20px;
+        font-size: 22px;
       }
       .ma {
         margin: auto;
@@ -44,13 +45,15 @@
       .sb {
         display: flex;
         justify-content: space-between;
-        padding-bottom: 3px;
+        align-items: center;
       }
       input,
       select {
         background-color: #f2f2f2;
         border-radius: 3px;
-        font-size: 18px;
+        font-size: 20px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+        margin-bottom: 5px;
       }
       .maxw60 {
         max-width: 60px;
@@ -70,6 +73,12 @@
         border: none;
         box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.6);
         cursor: pointer;
+        color: #f2f2f2;
+      }
+      #copyright {
+        text-align: center;
+        font-size: 16px;
+        margin: 20px;
       }
     </style>
   </head>
@@ -78,42 +87,54 @@
       <h2 class="m">Price Calculator</h2>
       <form id="price-estimator" class="f ma">
         <!-- dimensions -->
-        <p class="t">Room Size</p>
+        <p class="m t mb">Room Size</p>
         <div class="sb">
-          <label for="length">Length (m)</label
-          ><input
-            class="maxw60"
-            type="number"
-            id="length"
-            name="length"
-            min="0"
-            value="2"
-            required
-          />
+          <label for="length">Length:</label>
+          <div>
+            <input
+              class="maxw60"
+              type="number"
+              id="length"
+              name="length"
+              min="0"
+              value="2.0"
+              step="any"
+              required
+            />
+            m
+          </div>
         </div>
         <div class="sb">
-          <label for="width">Width (m)</label
-          ><input
-            class="maxw60"
-            type="number"
-            id="width"
-            name="width"
-            min="0"
-            value="2"
-            required
-          />
+          <label for="width">Width:</label>
+          <div>
+            <input
+              class="maxw60"
+              type="number"
+              id="width"
+              name="width"
+              min="0"
+              value="2.0"
+              step="any"
+              required
+            />
+            m
+          </div>
         </div>
         <div class="sb mb">
-          <label for="height">Height (m)</label>
-          <input
-            class="maxw60"
-            type="number"
-            id="height"
-            name="height"
-            min="0"
-            value="2"
-            required
-          />
+          <label for="height">Height:</label>
+          <div>
+            <input
+              class="maxw60"
+              type="number"
+              id="height"
+              name="height"
+              min="0"
+              value="2.0"
+              step="any"
+              required
+            />
+            m
+          </div>
         </div>
         <!-- service type options -->
         <label class="bold" for="service">Select Service</label>
@@ -126,7 +147,7 @@
         </select>
         <br />
         <!-- condition type options -->
-        <label class="bold" for="condition">Condition</label>
+        <label class="bold mt" for="condition">Condition</label>
         <br />
         <select class="maxw100" name="condition" id="condition" required>
           <option value="good" selected>Good</option>
@@ -144,35 +165,35 @@
         </select>
         <br />
         <!-- floor type options -->
-        <p class="m">Floor protection required</p>
+        <p class="m mt">Floor protection required?</p>
         <label>
           <input type="checkbox" name="floor" value="yes" />
           Yes
         </label>
         <br />
         <!-- wallpaper type options -->
-        <p class="m">Wallpaper to be removed</p>
+        <p class="m mt">Wallpaper to be removed?</p>
         <label>
           <input type="checkbox" name="paper" value="yes" />
           Yes
         </label>
         <br />
         <!-- plaster type options -->
-        <p class="m">Bare plaster</p>
+        <p class="m mt">Bare plaster?</p>
         <label>
           <input type="checkbox" name="plaster" value="yes" />
           Yes
         </label>
         <br />
         <!-- wood type options -->
-        <p class="m">Bare wood</p>
+        <p class="m mt">Bare wood?</p>
         <label>
           <input type="checkbox" name="wood" value="yes" />
           Yes
         </label>
         <br />
         <!-- mould option -->
-        <p class="m">Mould</p>
+        <p class="m mt">Mould?</p>
         <label>
           <input type="checkbox" name="mould" value="yes" />
           Yes
@@ -246,21 +267,21 @@
         <!-- trims -->
         <p class="m t">Trims</p>
         <label>
-          <input type="checkbox" name="coving" value="coving" />
+          <input class="mt" type="checkbox" name="coving" value="coving" />
           Coving
         </label>
         <br />
         <label>
-          <input type="checkbox" name="picture" value="picture" />
+          <input class="mt" type="checkbox" name="picture" value="picture" />
           Picture Rail
         </label>
         <br />
         <label>
-          <input type="checkbox" name="dado" value="dado" />
+          <input class="mt" type="checkbox" name="dado" value="dado" />
           Dado Rail
         </label>
         <br />
-        <p class="m t">Stairs</p>
+        <p class="m t mt">Stairs</p>
         <label>
           <input
             name="banister"
@@ -269,7 +290,7 @@
             value="banister"
             onchange="toggleBanisterOptions()"
           />
-          Banister
+          Banisters?
         </label>
         <div id="banisterOptions" style="display: none; margin-top: 10px">
           <p class="m bold">Enter Amount:</p>
@@ -302,13 +323,14 @@
               type="number"
               id="handrail"
               min="0"
-              value="0"
+              value="0.0"
+              step="any"
               required
             />
           </div>
         </div>
         <!-- material option -->
-        <p class="m">Include materials</p>
+        <p class="m mt">Include materials?</p>
         <label>
           <input type="checkbox" name="materials" value="yes" />
           Yes
@@ -320,7 +342,14 @@
         <button class="btn mt" type="submit">Estimate Price</button>
       </form>
     </div>
+    <div>
+      <p id="copyright">
+        Copyright &copy; <span id="year"></span> Your Company Name. All rights
+        reserved.
+      </p>
+    </div>
     <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
       document
         .getElementById("price-estimator")
         .addEventListener("submit", function (event) {
@@ -550,12 +579,12 @@
             estimate += handrail * handrailPricePerM;
           }
 
+          estimate = estimate < minCharge ? minCharge : estimate;
+
           if (materials === "yes") {
             materialsCost += materialsMinCharge;
             estimate += materialsCost;
           }
-
-          estimate = estimate < minCharge ? minCharge : estimate;
 
           document.getElementById("result").textContent = `£${estimate.toFixed(
             2
