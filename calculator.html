@@ -12,26 +12,33 @@
         font-size: 20px;
         color: black;
       }
+
       h2 {
         text-align: center;
       }
+
       .t {
         text-decoration: underline;
         font-weight: 700;
         font-size: 22px;
       }
+
       .ma {
         margin: auto;
       }
+
       .m {
         margin: 5px 0;
       }
+
       .mb {
         margin-bottom: 5px;
       }
+
       .mt {
         margin-top: 10px;
       }
+
       .f {
         padding: 10px 20px 10px 20px;
         border-radius: 5px;
@@ -39,14 +46,17 @@
         box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.6);
         max-width: 400px;
       }
+
       .p60 {
         padding: 10px 60px 60px 60px;
       }
+
       .sb {
         display: flex;
         justify-content: space-between;
         align-items: center;
       }
+
       input,
       select {
         background-color: #f2f2f2;
@@ -56,22 +66,27 @@
         margin-bottom: 5px;
         border: none;
       }
+
       .maxw60 {
         max-width: 60px;
       }
+
       .maxw200 {
         width: 100%;
         max-width: 200px;
         margin-right: 10px;
         margin-bottom: 0;
       }
+
       .maxw100 {
         width: 150px;
         margin-bottom: 5px;
       }
+
       .bold {
         font-weight: 600;
       }
+
       .btn {
         background-color: #1e90ff;
         font-size: 18px;
@@ -82,6 +97,7 @@
         cursor: pointer;
         color: #f2f2f2;
       }
+
       .btn-r {
         background-color: #e63946;
         font-size: 16px;
@@ -92,11 +108,13 @@
         cursor: pointer;
         color: #f2f2f2;
       }
+
       #copyright {
         text-align: center;
         font-size: 16px;
         margin: 20px;
       }
+
       .accordion {
         background-color: #eee;
         color: #444;
@@ -111,10 +129,12 @@
         transition: 0.4s;
         margin-bottom: 10px;
       }
+
       .active,
       .accordion:hover {
         background-color: #ccc;
       }
+
       .accordion:after {
         content: "\002B";
         color: #777;
@@ -122,9 +142,11 @@
         float: right;
         margin-left: 5px;
       }
+
       .active:after {
         content: "\2212";
       }
+
       .panel {
         padding: 10px 5px;
         background-color: white;
@@ -133,14 +155,17 @@
         overflow: hidden;
         transition: max-height 0.7s ease-out;
       }
+
       .accordion.active + .panel {
         display: block;
       }
+
       .tooltip {
         display: flex;
         justify-content: space-between;
         margin-bottom: 15px;
       }
+
       .tooltip .tooltiptext {
         visibility: hidden;
         background-color: #000;
@@ -155,6 +180,7 @@
         margin-left: -25px;
         font-size: 16px;
       }
+
       .tooltip .tooltiptext::after {
         content: "";
         position: absolute;
@@ -165,11 +191,13 @@
         border-style: solid;
         border-color: #000 transparent transparent transparent;
       }
+
       .tooltip .tooltiptext.invalid {
         visibility: visible;
       }
     </style>
   </head>
+
   <body>
     <div>
       <h2 class="m">Price Calculator</h2>
@@ -194,70 +222,30 @@
         <!-- number of doors -->
         <div class="sb">
           <label for="doors">Doors</label>
-          <input
-            class="maxw60"
-            type="number"
-            id="doors"
-            name="doors"
-            min="0"
-            value="0"
-            required
-          />
+          <input class="maxw60" type="number" id="doors" name="doors" min="0" value="0" required />
         </div>
         <!-- number of door frames -->
         <div class="sb">
           <label for="frames">Doorframes</label>
-          <input
-            class="maxw60"
-            type="number"
-            id="frames"
-            name="frames"
-            min="0"
-            value="0"
-            required
-          />
+          <input class="maxw60" type="number" id="frames" name="frames" min="0" value="0" required />
         </div>
         <!-- number of windows -->
         <div class="sb">
-          <label for="doors">Windows</label>
-          <input
-            class="maxw60"
-            type="number"
-            id="windows"
-            name="windows"
-            min="0"
-            value="0"
-            required
-          />
+          <label for="windows">Windows</label>
+          <input class="maxw60" type="number" id="windows" name="windows" min="0" value="0" required />
         </div>
         <!-- number of window cills -->
         <div class="sb">
-          <label for="doors">Window Cills</label>
-          <input
-            class="maxw60"
-            type="number"
-            id="cills"
-            name="cills"
-            min="0"
-            value="0"
-            required
-          />
+          <label for="cills">Window Cills</label>
+          <input class="maxw60" type="number" id="cills" name="cills" min="0" value="0" required />
         </div>
         <!-- number of radiators -->
         <div class="sb">
-          <label for="doors">Radiators</label>
-          <input
-            class="maxw60"
-            type="number"
-            id="radiators"
-            name="radiators"
-            min="0"
-            value="0"
-            required
-          />
+          <label for="radiators">Radiators</label>
+          <input class="maxw60" type="number" id="radiators" name="radiators" min="0" value="0" required />
         </div>
         <p class="m mt">Banisters?</p>
-        <label>
+        <label for="banister">
           <input
             name="banister"
             type="checkbox"
@@ -265,62 +253,47 @@
             value="banister"
             onchange="toggleBanisterOptions()"
           />
-          Yes</label
-        >
+          Yes
+        </label>
         <div id="banisterOptions" style="display: none; margin-top: 10px">
           <p class="m bold">Enter Amount:</p>
           <div class="sb">
-            <label class="minw80">Spindles</label>
-            <input
-              class="maxw60"
-              type="number"
-              id="spindles"
-              min="0"
-              value="0"
-              required
-            />
+            <label for="spindles" class="minw80">Spindles</label>
+            <input class="maxw60" type="number" id="spindles" min="0" value="0" required />
           </div>
           <div class="sb">
-            <label class="minw80">Newel Posts</label>
-            <input
-              class="maxw60"
-              type="number"
-              id="newel-posts"
-              min="0"
-              value="0"
-              required
-            />
+            <label for="newel-posts" class="minw80">Newel Posts</label>
+            <input class="maxw60" type="number" id="newel-posts" min="0" value="0" required />
           </div>
           <div class="sb">
-            <label>Handrail (m)</label>
-            <input
-              class="maxw60"
-              type="number"
-              id="handrail"
-              min="0"
-              value="0.0"
-              step="any"
-              required
-            />
+            <label for="handrail">Handrail (m)</label>
+            <input class="maxw60" type="number" id="handrail" min="0" value="0.0" step="any" required />
           </div>
         </div>
         <!-- material option -->
         <p class="m mt">Include materials?</p>
-        <label>
+        <label for="materials">
           <input type="checkbox" name="materials" value="yes" />
           Yes
         </label>
         <br />
         <!-- <p>Prices are inclusive of vat</p> -->
-        <div class="mt">Price: <span id="result"></span></div>
-        <div>Price inc Vat: <span id="result-vat"></span></div>
+        <div class="mt">
+          Price:
+          <span id="result"></span>
+        </div>
+        <div>
+          Price inc Vat:
+          <span id="result-vat"></span>
+        </div>
         <button class="btn mt" type="submit">Estimate Price</button>
       </form>
     </div>
     <div>
       <p id="copyright">
-        Copyright &copy; <span id="year"></span> Your Company Name. All rights
-        reserved.
+        Copyright &copy;
+        <span id="year"></span>
+        Your Company Name. All rights reserved.
       </p>
     </div>
     <script>
@@ -380,118 +353,118 @@
         panel.id = `panel-${uId}`;
 
         panel.innerHTML = `
-                  <div class="sb">
-                    <label for="length-${uId}">Length:</label>
-                    <div>
-                      <input class="maxw60" type="number" id="length-${uId}" name="length-${uId}" min="0" value="2.0" step="any" required /> m
-                    </div>
-                  </div>
+          <div class="sb">
+            <label for="length-${uId}">Length:</label>
+            <div>
+              <input class="maxw60" type="number" id="length-${uId}" name="length-${uId}" min="0" value="2.0" step="any" required /> m
+            </div>
+          </div>
 
-                  <div class="sb">
-                    <label for="width-${uId}">Width:</label>
-                    <div>
-                      <input class="maxw60" type="number" id="width-${uId}" name="width-${uId}" min="0" value="2.0" step="any" required /> m
-                    </div>
-                  </div>
+          <div class="sb">
+            <label for="width-${uId}">Width:</label>
+            <div>
+              <input class="maxw60" type="number" id="width-${uId}" name="width-${uId}" min="0" value="2.0" step="any" required /> m
+            </div>
+          </div>
 
-                  <div class="sb">
-                    <label for="height-${uId}">Height:</label>
-                    <div>
-                      <input class="maxw60" type="number" id="height-${uId}" name="height-${uId}" min="0" value="2.0" step="any" required /> m
-                    </div>
-                  </div>
+          <div class="sb">
+            <label for="height-${uId}">Height:</label>
+            <div>
+              <input class="maxw60" type="number" id="height-${uId}" name="height-${uId}" min="0" value="2.0" step="any" required /> m
+            </div>
+          </div>
 
-                  <div class="mt">
-                    <label class="bold" for="service-${uId}">Select Service</label>
-                    <br/>
-                    <select class="maxw100" name="service-${uId}" id="service-${uId}" required>
-                      <option value="room" selected>Full Room</option>
-                      <option value="walls">Walls Only</option>
-                      <option value="ceiling">Ceiling Only</option>
-                      <option value="woodwork">Woodwork Only</option>
-                    </select>
-                  </div>
+          <div class="mt">
+            <label class="bold" for="service-${uId}">Select Service</label>
+            <br/>
+            <select class="maxw100" name="service-${uId}" id="service-${uId}" required>
+              <option value="room" selected>Full Room</option>
+              <option value="walls">Walls Only</option>
+              <option value="ceiling">Ceiling Only</option>
+              <option value="woodwork">Woodwork Only</option>
+            </select>
+          </div>
 
-                  <div>
-                    <label class="bold" for="condition-${uId}">Condition</label>
-                    <br/>
-                    <select class="maxw100" name="condition-${uId}" id="condition-${uId}" required>
-                      <option value="good" selected>Good</option>
-                      <option value="average">Average</option>
-                      <option value="bad">Bad</option>
-                    </select>
-                  </div>
+          <div>
+            <label class="bold" for="condition-${uId}">Condition</label>
+            <br/>
+            <select class="maxw100" name="condition-${uId}" id="condition-${uId}" required>
+              <option value="good" selected>Good</option>
+              <option value="average">Average</option>
+              <option value="bad">Bad</option>
+            </select>
+          </div>
 
-                  <div>
-                    <label class="bold" for="finish-${uId}">Finish</label>
-                    <br/>
-                    <select class="maxw100" name="finish-${uId}" id="finish-${uId}" required>
-                      <option value="hand" selected>Hand Painted</option>
-                      <option value="spray">Spray Painted</option>
-                      <option value="wallpaper">Wallpaper</option>
-                    </select>
-                  </div>
+          <div>
+            <label class="bold" for="finish-${uId}">Finish</label>
+            <br/>
+            <select class="maxw100" name="finish-${uId}" id="finish-${uId}" required>
+              <option value="hand" selected>Hand Painted</option>
+              <option value="spray">Spray Painted</option>
+              <option value="wallpaper">Wallpaper</option>
+            </select>
+          </div>
 
-                  <div>
-                    <p class="m mt">Floor protection required?</p>
-                    <label>
-                      <input type="checkbox" id="floor-${uId}" name="floor-${uId}" value="yes" />
-                      Yes
-                    </label>
-                  </div>
+          <div>
+            <p class="m mt">Floor protection required?</p>
+            <label>
+              <input type="checkbox" id="floor-${uId}" name="floor-${uId}" value="yes" />
+              Yes
+            </label>
+          </div>
 
-                  <div>
-                    <p class="m mt">Wallpaper to be removed?</p>
-                    <label>
-                      <input type="checkbox" id="paper-${uId}" name="paper-${uId}" value="yes" />
-                      Yes
-                    </label>
-                  </div>
+          <div>
+            <p class="m mt">Wallpaper to be removed?</p>
+            <label>
+              <input type="checkbox" id="paper-${uId}" name="paper-${uId}" value="yes" />
+              Yes
+            </label>
+          </div>
 
-                  <div>
-                    <p class="m mt">Bare plaster?</p>
-                    <label>
-                      <input type="checkbox" id="plaster-${uId}" name="plaster-${uId}" value="yes" />
-                      Yes
-                    </label>
-                  </div>
+          <div>
+            <p class="m mt">Bare plaster?</p>
+            <label>
+              <input type="checkbox" id="plaster-${uId}" name="plaster-${uId}" value="yes" />
+              Yes
+            </label>
+          </div>
 
-                  <div>
-                    <p class="m mt">Bare wood?</p>
-                    <label>
-                      <input type="checkbox" id="wood-${uId}" name="wood-${uId}" value="yes" />
-                      Yes
-                    </label>
-                  </div>
+          <div>
+            <p class="m mt">Bare wood?</p>
+            <label>
+              <input type="checkbox" id="wood-${uId}" name="wood-${uId}" value="yes" />
+              Yes
+            </label>
+          </div>
 
-                  <div>
-                    <p class="m mt">Mould?</p>
-                    <label>
-                      <input type="checkbox" id="mould-${uId}" name="mould-${uId}" value="yes" />
-                      Yes
-                    </label>
-                  </div>
+          <div>
+            <p class="m mt">Mould?</p>
+            <label>
+              <input type="checkbox" id="mould-${uId}" name="mould-${uId}" value="yes" />
+              Yes
+            </label>
+          </div>
 
-                  <div>
-                    <p class="m t">Trims</p>
-                    <label>
-                      <input class="mt" type="checkbox" id="coving-${uId}" name="coving-${uId}" value="coving" />
-                      Coving
-                    </label><br />
+          <div>
+            <p class="m t">Trims</p>
+            <label>
+              <input class="mt" type="checkbox" id="coving-${uId}" name="coving-${uId}" value="coving" />
+              Coving
+            </label><br />
 
-                    <label>
-                      <input class="mt" type="checkbox" id="picture-${uId}" name="picture-${uId}" value="picture" />
-                      Picture Rail
-                    </label><br />
+            <label>
+              <input class="mt" type="checkbox" id="picture-${uId}" name="picture-${uId}" value="picture" />
+              Picture Rail
+            </label><br />
 
-                    <label>
-                      <input class="mt" type="checkbox" id="dado-${uId}" name="dado-${uId}" value="dado" />
-                      Dado Rail
-                    </label>
-                  </div>
+            <label>
+              <input class="mt" type="checkbox" id="dado-${uId}" name="dado-${uId}" value="dado" />
+              Dado Rail
+            </label>
+          </div>
 
-                  <button onclick="removeRoom('${uId}')" class="btn-r mt">Remove Room</button>
-                `;
+          <button onclick="removeRoom('${uId}')" class="btn-r mt">Remove Room</button>
+        `;
 
         roomList.appendChild(roomAccordion);
         roomList.appendChild(panel);
@@ -549,8 +522,7 @@
 
         // Helper variables
         const val = (selector) => document.querySelector(selector)?.value || "";
-        const checkedVal = (name) =>
-          document.querySelector(`input[name="${name}"]:checked`)?.value || "";
+        const checkedVal = (name) => document.querySelector(`input[name="${name}"]:checked`)?.value || "";
 
         const doors = parseInt(document.getElementById("doors").value);
         const frames = parseInt(document.getElementById("frames").value);
@@ -559,9 +531,7 @@
         const cills = parseInt(document.getElementById("cills").value);
         const banister = checkedVal("banister");
         const spindles = parseInt(document.getElementById("spindles").value);
-        const newelPosts = parseInt(
-          document.getElementById("newel-posts").value
-        );
+        const newelPosts = parseInt(document.getElementById("newel-posts").value);
         const handrail = parseFloat(document.getElementById("handrail").value);
         const materials = checkedVal("materials");
 
@@ -569,15 +539,9 @@
         let estimate = 0;
 
         roomArray.forEach((uId) => {
-          const length = parseFloat(
-            document.getElementById(`length-${uId}`).value
-          );
-          const width = parseFloat(
-            document.getElementById(`width-${uId}`).value
-          );
-          const height = parseFloat(
-            document.getElementById(`height-${uId}`).value
-          );
+          const length = parseFloat(document.getElementById(`length-${uId}`).value);
+          const width = parseFloat(document.getElementById(`width-${uId}`).value);
+          const height = parseFloat(document.getElementById(`height-${uId}`).value);
           const service = val(`select[name="service-${uId}"]`);
           const condition = val(`select[name="condition-${uId}"]`);
           const finish = val(`select[name="finish-${uId}"]`);
@@ -726,12 +690,8 @@
           estimate += materialsCost;
         }
 
-        document.getElementById("result").textContent = `£${estimate.toFixed(
-          2
-        )}`;
-        document.getElementById("result-vat").textContent = `£${(
-          estimate * vat
-        ).toFixed(2)}`;
+        document.getElementById("result").textContent = `£${estimate.toFixed(2)}`;
+        document.getElementById("result-vat").textContent = `£${(estimate * vat).toFixed(2)}`;
       }
 
       function toggleBanisterOptions() {

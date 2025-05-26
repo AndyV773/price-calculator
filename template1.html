@@ -9,11 +9,13 @@
         font-family: Arial, sans-serif;
         background-color: #f4f4f4;
       }
+
       h1 {
         color: blue;
       }
     </style>
   </head>
+
   <body>
     <h1>Price Calculator</h1>
     <form id="price-estimator">
@@ -22,14 +24,7 @@
       <p>Room Size</p>
       <label for="length">Length (m):</label>
       <br />
-      <input
-        type="number"
-        id="length"
-        name="length"
-        min="0"
-        value="0"
-        required
-      />
+      <input type="number" id="length" name="length" min="0" value="0" required />
       <br />
       <label for="width">Width (m):</label>
       <br />
@@ -37,14 +32,7 @@
       <br />
       <label for="height">Height (m):</label>
       <br />
-      <input
-        type="number"
-        id="height"
-        name="height"
-        min="0"
-        value="0"
-        required
-      />
+      <input type="number" id="height" name="height" min="0" value="0" required />
       <br />
       <br />
       <!-- service type options -->
@@ -121,14 +109,7 @@
       <!-- number of windows -->
       <label for="doors">Number of Windows:</label>
       <br />
-      <input
-        type="number"
-        id="windows"
-        name="windows"
-        min="0"
-        value="0"
-        required
-      />
+      <input type="number" id="windows" name="windows" min="0" value="0" required />
       <br />
       <!-- number of window cills -->
       <label for="doors">Number of Window Cills:</label>
@@ -138,14 +119,7 @@
       <!-- number of radiators -->
       <label for="doors">Number of radiators:</label>
       <br />
-      <input
-        type="number"
-        id="radiators"
-        name="radiators"
-        min="0"
-        value="0"
-        required
-      />
+      <input type="number" id="radiators" name="radiators" min="0" value="0" required />
       <br />
       <!-- trims -->
       <p>Trims</p>
@@ -171,40 +145,30 @@
       <button type="submit">Estimate Price</button>
     </form>
     <script>
-      document
-        .getElementById("price-estimator")
-        .addEventListener("submit", function (event) {
-          event.preventDefault(); // Prevent the default form submission
-          // price values
-          const doorPrice = 30;
-          const windowPrice = 40;
-          const cillsPrice = 10;
-          const radiatorPrice = 15;
-          const vat = 1.2;
-          // Retrieve values from the form
-          const length = parseFloat(document.getElementById("length").value);
-          const width = parseFloat(document.getElementById("width").value);
-          const height = parseFloat(document.getElementById("height").value);
-          const doors = parseInt(document.getElementById("doors").value);
-          const windows = parseInt(document.getElementById("windows").value);
-          const radiators = parseInt(
-            document.getElementById("radiators").value
-          );
-          const cills = parseInt(document.getElementById("cills").value);
-          let estimate = 0;
-          estimate += doors * doorPrice;
-          estimate += windows * windowPrice;
-          estimate += cills * cillsPrice;
-          estimate += radiators * radiatorPrice;
-          document.getElementById(
-            "result"
-          ).textContent = `Estimated Price: £${estimate.toFixed(2)}`;
-          document.getElementById(
-            "result-vat"
-          ).textContent = `Estimated Price vat: £${(estimate * vat).toFixed(
-            2
-          )}`;
-        });
+      document.getElementById("price-estimator").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent the default form submission
+        // price values
+        const doorPrice = 30;
+        const windowPrice = 40;
+        const cillsPrice = 10;
+        const radiatorPrice = 15;
+        const vat = 1.2;
+        // Retrieve values from the form
+        const length = parseFloat(document.getElementById("length").value);
+        const width = parseFloat(document.getElementById("width").value);
+        const height = parseFloat(document.getElementById("height").value);
+        const doors = parseInt(document.getElementById("doors").value);
+        const windows = parseInt(document.getElementById("windows").value);
+        const radiators = parseInt(document.getElementById("radiators").value);
+        const cills = parseInt(document.getElementById("cills").value);
+        let estimate = 0;
+        estimate += doors * doorPrice;
+        estimate += windows * windowPrice;
+        estimate += cills * cillsPrice;
+        estimate += radiators * radiatorPrice;
+        document.getElementById("result").textContent = `Estimated Price: £${estimate.toFixed(2)}`;
+        document.getElementById("result-vat").textContent = `Estimated Price vat: £${(estimate * vat).toFixed(2)}`;
+      });
     </script>
   </body>
 </html>

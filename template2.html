@@ -9,14 +9,17 @@
         font-family: Arial, sans-serif;
         background-color: #f4f4f4;
       }
+
       h1 {
         color: blue;
       }
+
       .m {
         margin: 0px;
       }
     </style>
   </head>
+
   <body>
     <h1 class="m">Price Calculator</h1>
     <form id="price-estimator">
@@ -24,14 +27,7 @@
       <p class="m">Room Size</p>
       <label for="length">Length (m):</label>
       <br />
-      <input
-        type="number"
-        id="length"
-        name="length"
-        min="0"
-        value="4"
-        required
-      />
+      <input type="number" id="length" name="length" min="0" value="4" required />
       <br />
       <label for="width">Width (m):</label>
       <br />
@@ -39,14 +35,7 @@
       <br />
       <label for="height">Height (m):</label>
       <br />
-      <input
-        type="number"
-        id="height"
-        name="height"
-        min="0"
-        value="4"
-        required
-      />
+      <input type="number" id="height" name="height" min="0" value="4" required />
       <br />
       <!-- service type options -->
       <label for="service">Select Service:</label>
@@ -119,26 +108,12 @@
       <!-- number of door frames -->
       <label for="frames">Number of doorframes :</label>
       <br />
-      <input
-        type="number"
-        id="frames"
-        name="frames"
-        min="0"
-        value="0"
-        required
-      />
+      <input type="number" id="frames" name="frames" min="0" value="0" required />
       <br />
       <!-- number of windows -->
       <label for="doors">Number of windows:</label>
       <br />
-      <input
-        type="number"
-        id="windows"
-        name="windows"
-        min="0"
-        value="0"
-        required
-      />
+      <input type="number" id="windows" name="windows" min="0" value="0" required />
       <br />
       <!-- number of window cills -->
       <label for="doors">Number of window Cills:</label>
@@ -148,14 +123,7 @@
       <!-- number of radiators -->
       <label for="doors">Number of radiators:</label>
       <br />
-      <input
-        type="number"
-        id="radiators"
-        name="radiators"
-        min="0"
-        value="0"
-        required
-      />
+      <input type="number" id="radiators" name="radiators" min="0" value="0" required />
       <br />
       <!-- trims -->
       <p class="m">Trims</p>
@@ -212,261 +180,237 @@
       <button type="submit">Estimate Price</button>
     </form>
     <script>
-      document
-        .getElementById("price-estimator")
-        .addEventListener("submit", function (event) {
-          event.preventDefault(); // Prevent the default form submission
+      document.getElementById("price-estimator").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent the default form submission
 
-          // price values
-          const wallOnlyPricePerSqM = 5;
-          const ceillingOnlyPricePerSqM = 5;
-          const woodOnlyPricePerSqM = 4;
-          const goodPrice = 1; // price is deducted
-          const averagePrice = 0;
-          const badPrice = 1;
-          const sprayPricePerSqM = 1;
-          const wallpaperPricePerSqM = 1;
-          const floorPrice = 1;
-          const wallpaperRemovePricePerSqM = 0.5;
-          const barePlasterPricePerSqM = 0.5;
-          const bareWoodPricePerSqM = 0.5;
-          const doorPrice = 30;
-          const doorframesPrice = 10;
-          const windowPrice = 40;
-          const cillsPrice = 10;
-          const radiatorPrice = 15;
-          const mouldPrice = 100;
-          const covingPricePerSqM = 0.1;
-          const picturePricePerSqM = 0.1;
-          const dadoPricePerSqM = 0.1;
-          const spindlesPrice = 3;
-          const newelPostsPrice = 3;
-          const handrailPricePerM = 3;
-          const wallMaterialPricePerSqM = 0.5;
-          const ceilingMaterialPricePerSqM = 0.5;
-          const woodMaterialPricePerSqM = 0.8;
-          const minCharge = 200;
-          const materialsMinCharge = 50;
-          const vat = 1.2;
+        // price values
+        const wallOnlyPricePerSqM = 5;
+        const ceillingOnlyPricePerSqM = 5;
+        const woodOnlyPricePerSqM = 4;
+        const goodPrice = 1; // price is deducted
+        const averagePrice = 0;
+        const badPrice = 1;
+        const sprayPricePerSqM = 1;
+        const wallpaperPricePerSqM = 1;
+        const floorPrice = 1;
+        const wallpaperRemovePricePerSqM = 0.5;
+        const barePlasterPricePerSqM = 0.5;
+        const bareWoodPricePerSqM = 0.5;
+        const doorPrice = 30;
+        const doorframesPrice = 10;
+        const windowPrice = 40;
+        const cillsPrice = 10;
+        const radiatorPrice = 15;
+        const mouldPrice = 100;
+        const covingPricePerSqM = 0.1;
+        const picturePricePerSqM = 0.1;
+        const dadoPricePerSqM = 0.1;
+        const spindlesPrice = 3;
+        const newelPostsPrice = 3;
+        const handrailPricePerM = 3;
+        const wallMaterialPricePerSqM = 0.5;
+        const ceilingMaterialPricePerSqM = 0.5;
+        const woodMaterialPricePerSqM = 0.8;
+        const minCharge = 200;
+        const materialsMinCharge = 50;
+        const vat = 1.2;
 
-          const length = parseFloat(document.getElementById("length").value);
-          const width = parseFloat(document.getElementById("width").value);
-          const height = parseFloat(document.getElementById("height").value);
-          const doors = parseInt(document.getElementById("doors").value);
-          const frames = parseInt(document.getElementById("frames").value);
-          const windows = parseInt(document.getElementById("windows").value);
-          const radiators = parseInt(
-            document.getElementById("radiators").value
-          );
-          const cills = parseInt(document.getElementById("cills").value);
-          const spindles = parseInt(document.getElementById("spindles").value);
-          const newelPosts = parseInt(
-            document.getElementById("newel-posts").value
-          );
-          const handrail = parseInt(document.getElementById("handrail").value);
-          const service = document.querySelector(
-            'select[name="service"]'
-          ).value;
-          const condition = document.querySelector(
-            'select[name="condition"]'
-          ).value;
-          const finish = document.querySelector('select[name="finish"]').value;
-          const floor = document.querySelector('input[name="floor"]:checked')
-            ? document.querySelector('input[name="floor"]:checked').value
-            : "";
-          const paper = document.querySelector('input[name="paper"]:checked')
-            ? document.querySelector('input[name="paper"]:checked').value
-            : "";
-          const plaster = document.querySelector(
-            'input[name="plaster"]:checked'
-          )
-            ? document.querySelector('input[name="plaster"]:checked').value
-            : "";
-          const wood = document.querySelector('input[name="wood"]:checked')
-            ? document.querySelector('input[name="wood"]:checked').value
-            : "";
-          const mould = document.querySelector('input[name="mould"]:checked')
-            ? document.querySelector('input[name="mould"]:checked').value
-            : "";
-          const coving = document.querySelector('input[name="coving"]:checked')
-            ? document.querySelector('input[name="coving"]:checked').value
-            : "";
-          const picture = document.querySelector(
-            'input[name="picture"]:checked'
-          )
-            ? document.querySelector('input[name="picture"]:checked').value
-            : "";
-          const dado = document.querySelector('input[name="dado"]:checked')
-            ? document.querySelector('input[name="dado"]:checked').value
-            : "";
-          const banister = document.querySelector(
-            'input[name="banister"]:checked'
-          )
-            ? document.querySelector('input[name="banister"]:checked').value
-            : "";
-          const materials = document.querySelector(
-            'input[name="materials"]:checked'
-          )
-            ? document.querySelector('input[name="materials"]:checked').value
-            : "";
+        const length = parseFloat(document.getElementById("length").value);
+        const width = parseFloat(document.getElementById("width").value);
+        const height = parseFloat(document.getElementById("height").value);
+        const doors = parseInt(document.getElementById("doors").value);
+        const frames = parseInt(document.getElementById("frames").value);
+        const windows = parseInt(document.getElementById("windows").value);
+        const radiators = parseInt(document.getElementById("radiators").value);
+        const cills = parseInt(document.getElementById("cills").value);
+        const spindles = parseInt(document.getElementById("spindles").value);
+        const newelPosts = parseInt(document.getElementById("newel-posts").value);
+        const handrail = parseInt(document.getElementById("handrail").value);
+        const service = document.querySelector('select[name="service"]').value;
+        const condition = document.querySelector('select[name="condition"]').value;
+        const finish = document.querySelector('select[name="finish"]').value;
+        const floor = document.querySelector('input[name="floor"]:checked')
+          ? document.querySelector('input[name="floor"]:checked').value
+          : "";
+        const paper = document.querySelector('input[name="paper"]:checked')
+          ? document.querySelector('input[name="paper"]:checked').value
+          : "";
+        const plaster = document.querySelector('input[name="plaster"]:checked')
+          ? document.querySelector('input[name="plaster"]:checked').value
+          : "";
+        const wood = document.querySelector('input[name="wood"]:checked')
+          ? document.querySelector('input[name="wood"]:checked').value
+          : "";
+        const mould = document.querySelector('input[name="mould"]:checked')
+          ? document.querySelector('input[name="mould"]:checked').value
+          : "";
+        const coving = document.querySelector('input[name="coving"]:checked')
+          ? document.querySelector('input[name="coving"]:checked').value
+          : "";
+        const picture = document.querySelector('input[name="picture"]:checked')
+          ? document.querySelector('input[name="picture"]:checked').value
+          : "";
+        const dado = document.querySelector('input[name="dado"]:checked')
+          ? document.querySelector('input[name="dado"]:checked').value
+          : "";
+        const banister = document.querySelector('input[name="banister"]:checked')
+          ? document.querySelector('input[name="banister"]:checked').value
+          : "";
+        const materials = document.querySelector('input[name="materials"]:checked')
+          ? document.querySelector('input[name="materials"]:checked').value
+          : "";
 
-          let area = length * width;
-          let parimeter = 2 * (length + width);
-          let surfaceArea = (length * 2 + width * 2) * height;
-          let estimate = 0;
-          let materialsCost = 0;
+        let area = length * width;
+        let parimeter = 2 * (length + width);
+        let surfaceArea = (length * 2 + width * 2) * height;
+        let estimate = 0;
+        let materialsCost = 0;
 
-          // full room
-          if (service === "room") {
-            estimate += surfaceArea * wallOnlyPricePerSqM;
-            estimate += area * ceillingOnlyPricePerSqM;
-            estimate += parimeter * woodOnlyPricePerSqM;
-            if (finish === "spray") {
-              estimate += surfaceArea * sprayPricePerSqM;
-              estimate += area * sprayPricePerSqM;
-              estimate += parimeter * sprayPricePerSqM;
-            } else if (finish === "wallpaper") {
-              estimate += surfaceArea * wallpaperPricePerSqM;
-            }
-            if (paper === "yes") {
-              estimate += surfaceArea * wallpaperRemovePricePerSqM;
-            }
-            if (plaster === "yes") {
-              estimate += surfaceArea * barePlasterPricePerSqM;
-              console.log("bear plaster selected");
-              console.log("estimate =", estimate);
-            }
-            if (wood === "yes") {
-              estimate += parimeter * bareWoodPricePerSqM;
-              console.log("bear wood selected");
-              console.log("estimate =", estimate);
-            }
-            if (coving === "coving") {
-              estimate += parimeter * covingPricePerSqM;
-            }
-            if (picture === "picture") {
-              estimate += parimeter * picturePricePerSqM;
-            }
-            if (dado === "dado") {
-              estimate += parimeter * dadoPricePerSqM;
-            }
-            if (materials === "yes") {
-              materialsCost += surfaceArea * wallMaterialPricePerSqM;
-              console.log("wall materials = ", materialsCost);
-              materialsCost += area * ceilingMaterialPricePerSqM;
-              console.log("plus ceiling materials = ", materialsCost);
-              materialsCost += parimeter * woodMaterialPricePerSqM;
-              console.log("plus wood materials = ", materialsCost);
-            }
-            // walls only
-          } else if (service === "walls") {
-            estimate += surfaceArea * wallOnlyPricePerSqM;
-            if (finish === "spray") {
-              estimate += surfaceArea * sprayPricePerSqM;
-            } else if (finish === "wallpaper") {
-              estimate += surfaceArea * wallpaperPricePerSqM;
-            }
-            if (paper === "yes") {
-              estimate += surfaceArea * wallpaperRemovePricePerSqM;
-            }
-            if (plaster === "yes") {
-              estimate += surfaceArea * barePlasterPricePerSqM;
-              console.log("bear plaster selected");
-              console.log("estimate =", estimate);
-            }
-            if (materials === "yes") {
-              materialsCost += surfaceArea * wallMaterialPricePerSqM;
-              console.log("wall materials = ", materialsCost);
-            }
-            // ceiling only
-          } else if (service === "ceiling") {
-            estimate += area * ceillingOnlyPricePerSqM;
-            if (finish === "spray") {
-              estimate += area * sprayPricePerSqM;
-            }
-            if (floor === "yes") {
-              estimate += area * floorPrice;
-            }
-            if (plaster === "yes") {
-              estimate += area * barePlasterPricePerSqM;
-              console.log("bear plaster selected");
-              console.log("estimate =", estimate);
-            }
-            if (materials === "yes") {
-              materialsCost += area * ceilingMaterialPricePerSqM;
-              console.log("ceiling materials = ", materialsCost);
-            }
-            // woodwork only
-          } else if (service === "woodwork") {
-            estimate += parimeter * woodOnlyPricePerSqM;
-            if (finish === "spray") {
-              estimate += parimeter * sprayPricePerSqM;
-            }
-            if (coving === "coving") {
-              estimate += parimeter * covingPricePerSqM;
-            }
-            if (picture === "picture") {
-              estimate += parimeter * picturePricePerSqM;
-            }
-            if (dado === "dado") {
-              estimate += parimeter * dadoPricePerSqM;
-            }
-            if (wood === "yes") {
-              estimate += parimeter * bareWoodPricePerSqM;
-              console.log("bear wood selected");
-              console.log("estimate =", estimate);
-            }
-            if (materials === "yes") {
-              materialsCost += parimeter * woodMaterialPricePerSqM;
-              console.log("wood materials = ", materialsCost);
-            }
+        // full room
+        if (service === "room") {
+          estimate += surfaceArea * wallOnlyPricePerSqM;
+          estimate += area * ceillingOnlyPricePerSqM;
+          estimate += parimeter * woodOnlyPricePerSqM;
+          if (finish === "spray") {
+            estimate += surfaceArea * sprayPricePerSqM;
+            estimate += area * sprayPricePerSqM;
+            estimate += parimeter * sprayPricePerSqM;
+          } else if (finish === "wallpaper") {
+            estimate += surfaceArea * wallpaperPricePerSqM;
           }
-
-          // Add condition-related price adjustments
-          if (condition === "good") {
-            estimate -= area * goodPrice;
-          } else if (condition === "average") {
-            estimate += area * averagePrice;
-          } else if (condition === "bad") {
-            estimate += area * badPrice;
+          if (paper === "yes") {
+            estimate += surfaceArea * wallpaperRemovePricePerSqM;
           }
-
-          if (mould === "yes") {
-            estimate += mouldPrice;
+          if (plaster === "yes") {
+            estimate += surfaceArea * barePlasterPricePerSqM;
+            console.log("bear plaster selected");
+            console.log("estimate =", estimate);
           }
-
-          // Add cost for each
-          estimate += doors * doorPrice;
-          estimate += frames * doorframesPrice;
-          estimate += windows * windowPrice;
-          estimate += cills * cillsPrice;
-          estimate += radiators * radiatorPrice;
-
-          if (banister === "banister") {
-            estimate += spindles * spindlesPrice;
-            estimate += newelPosts * newelPostsPrice;
-            estimate += handrail * handrailPricePerM;
+          if (wood === "yes") {
+            estimate += parimeter * bareWoodPricePerSqM;
+            console.log("bear wood selected");
+            console.log("estimate =", estimate);
           }
-
+          if (coving === "coving") {
+            estimate += parimeter * covingPricePerSqM;
+          }
+          if (picture === "picture") {
+            estimate += parimeter * picturePricePerSqM;
+          }
+          if (dado === "dado") {
+            estimate += parimeter * dadoPricePerSqM;
+          }
           if (materials === "yes") {
-            materialsCost += materialsMinCharge;
-            estimate += materialsCost;
-            console.log("min charge materials = ", materialsCost);
+            materialsCost += surfaceArea * wallMaterialPricePerSqM;
+            console.log("wall materials = ", materialsCost);
+            materialsCost += area * ceilingMaterialPricePerSqM;
+            console.log("plus ceiling materials = ", materialsCost);
+            materialsCost += parimeter * woodMaterialPricePerSqM;
+            console.log("plus wood materials = ", materialsCost);
           }
-          console.log("total materials = ", materialsCost);
-          console.log("estimate plus min charge =", estimate, "+", minCharge);
-          estimate += minCharge;
-          console.log("estimate total =", estimate);
+          // walls only
+        } else if (service === "walls") {
+          estimate += surfaceArea * wallOnlyPricePerSqM;
+          if (finish === "spray") {
+            estimate += surfaceArea * sprayPricePerSqM;
+          } else if (finish === "wallpaper") {
+            estimate += surfaceArea * wallpaperPricePerSqM;
+          }
+          if (paper === "yes") {
+            estimate += surfaceArea * wallpaperRemovePricePerSqM;
+          }
+          if (plaster === "yes") {
+            estimate += surfaceArea * barePlasterPricePerSqM;
+            console.log("bear plaster selected");
+            console.log("estimate =", estimate);
+          }
+          if (materials === "yes") {
+            materialsCost += surfaceArea * wallMaterialPricePerSqM;
+            console.log("wall materials = ", materialsCost);
+          }
+          // ceiling only
+        } else if (service === "ceiling") {
+          estimate += area * ceillingOnlyPricePerSqM;
+          if (finish === "spray") {
+            estimate += area * sprayPricePerSqM;
+          }
+          if (floor === "yes") {
+            estimate += area * floorPrice;
+          }
+          if (plaster === "yes") {
+            estimate += area * barePlasterPricePerSqM;
+            console.log("bear plaster selected");
+            console.log("estimate =", estimate);
+          }
+          if (materials === "yes") {
+            materialsCost += area * ceilingMaterialPricePerSqM;
+            console.log("ceiling materials = ", materialsCost);
+          }
+          // woodwork only
+        } else if (service === "woodwork") {
+          estimate += parimeter * woodOnlyPricePerSqM;
+          if (finish === "spray") {
+            estimate += parimeter * sprayPricePerSqM;
+          }
+          if (coving === "coving") {
+            estimate += parimeter * covingPricePerSqM;
+          }
+          if (picture === "picture") {
+            estimate += parimeter * picturePricePerSqM;
+          }
+          if (dado === "dado") {
+            estimate += parimeter * dadoPricePerSqM;
+          }
+          if (wood === "yes") {
+            estimate += parimeter * bareWoodPricePerSqM;
+            console.log("bear wood selected");
+            console.log("estimate =", estimate);
+          }
+          if (materials === "yes") {
+            materialsCost += parimeter * woodMaterialPricePerSqM;
+            console.log("wood materials = ", materialsCost);
+          }
+        }
 
-          document.getElementById(
-            "result"
-          ).textContent = `Estimated Price: £${estimate.toFixed(2)}`;
-          document.getElementById(
-            "result-vat"
-          ).textContent = `Estimated Price vat: £${(estimate * vat).toFixed(
-            2
-          )}`;
-        });
+        // Add condition-related price adjustments
+        if (condition === "good") {
+          estimate -= area * goodPrice;
+        } else if (condition === "average") {
+          estimate += area * averagePrice;
+        } else if (condition === "bad") {
+          estimate += area * badPrice;
+        }
+
+        if (mould === "yes") {
+          estimate += mouldPrice;
+        }
+
+        // Add cost for each
+        estimate += doors * doorPrice;
+        estimate += frames * doorframesPrice;
+        estimate += windows * windowPrice;
+        estimate += cills * cillsPrice;
+        estimate += radiators * radiatorPrice;
+
+        if (banister === "banister") {
+          estimate += spindles * spindlesPrice;
+          estimate += newelPosts * newelPostsPrice;
+          estimate += handrail * handrailPricePerM;
+        }
+
+        if (materials === "yes") {
+          materialsCost += materialsMinCharge;
+          estimate += materialsCost;
+          console.log("min charge materials = ", materialsCost);
+        }
+        console.log("total materials = ", materialsCost);
+        console.log("estimate plus min charge =", estimate, "+", minCharge);
+        estimate += minCharge;
+        console.log("estimate total =", estimate);
+
+        document.getElementById("result").textContent = `Estimated Price: £${estimate.toFixed(2)}`;
+        document.getElementById("result-vat").textContent = `Estimated Price vat: £${(estimate * vat).toFixed(2)}`;
+      });
       function toggleBanisterOptions() {
         const checkbox = document.getElementById("banisterCheckbox");
         const options = document.getElementById("banisterOptions");
