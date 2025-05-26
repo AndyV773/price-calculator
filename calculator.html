@@ -33,7 +33,7 @@
         margin-top: 10px;
       }
       .f {
-        padding: 10px 60px 10px 20px;
+        padding: 10px 20px 10px 20px;
         border-radius: 5px;
         background-color: #fefefe;
         box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.6);
@@ -54,9 +54,16 @@
         font-size: 20px;
         box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
         margin-bottom: 5px;
+        border: none;
       }
       .maxw60 {
         max-width: 60px;
+      }
+      .maxw200 {
+        width: 100%;
+        max-width: 200px;
+        margin-right: 10px;
+        margin-bottom: 0;
       }
       .maxw100 {
         width: 150px;
@@ -75,10 +82,91 @@
         cursor: pointer;
         color: #f2f2f2;
       }
+      .btn-r {
+        background-color: #e63946;
+        font-size: 16px;
+        padding: 5px 6px;
+        border-radius: 3px;
+        border: none;
+        box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.6);
+        cursor: pointer;
+        color: #f2f2f2;
+      }
       #copyright {
         text-align: center;
         font-size: 16px;
         margin: 20px;
+      }
+      .accordion {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 10px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        border-radius: 3px;
+        font-size: 20px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+        transition: 0.4s;
+        margin-bottom: 10px;
+      }
+      .active,
+      .accordion:hover {
+        background-color: #ccc;
+      }
+      .accordion:after {
+        content: "\002B";
+        color: #777;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+      }
+      .active:after {
+        content: "\2212";
+      }
+      .panel {
+        padding: 10px 5px;
+        background-color: white;
+        max-height: 0;
+        display: none;
+        overflow: hidden;
+        transition: max-height 0.7s ease-out;
+      }
+      .accordion.active + .panel {
+        display: block;
+      }
+      .tooltip {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
+      .tooltip .tooltiptext {
+        visibility: hidden;
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        padding: 5px 5px;
+        border-radius: 3px;
+        position: absolute;
+        z-index: 1;
+        top: 60px;
+        left: 40%;
+        margin-left: -25px;
+        font-size: 16px;
+      }
+      .tooltip .tooltiptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #000 transparent transparent transparent;
+      }
+      .tooltip .tooltiptext.invalid {
+        visibility: visible;
       }
     </style>
   </head>
@@ -87,117 +175,21 @@
       <h2 class="m">Price Calculator</h2>
       <form id="price-estimator" class="f ma">
         <!-- dimensions -->
-        <p class="m t mb">Room Size</p>
-        <div class="sb">
-          <label for="length">Length:</label>
-          <div>
-            <input
-              class="maxw60"
-              type="number"
-              id="length"
-              name="length"
-              min="0"
-              value="2.0"
-              step="any"
-              required
-            />
-            m
-          </div>
+        <p class="m t mb">Rooms</p>
+        <div id="room-input" class="tooltip">
+          <span id="tooltip" class="tooltiptext">Enter Room Name</span>
+          <input
+            type="text"
+            class="maxw200"
+            id="room-name"
+            placeholder="Enter Room Name"
+            autocomplete="off"
+            minlength="0"
+            maxlength="20"
+          />
+          <button type="button" id="add-room" class="btn">Add Room</button>
         </div>
-        <div class="sb">
-          <label for="width">Width:</label>
-          <div>
-            <input
-              class="maxw60"
-              type="number"
-              id="width"
-              name="width"
-              min="0"
-              value="2.0"
-              step="any"
-              required
-            />
-            m
-          </div>
-        </div>
-        <div class="sb mb">
-          <label for="height">Height:</label>
-          <div>
-            <input
-              class="maxw60"
-              type="number"
-              id="height"
-              name="height"
-              min="0"
-              value="2.0"
-              step="any"
-              required
-            />
-            m
-          </div>
-        </div>
-        <!-- service type options -->
-        <label class="bold" for="service">Select Service</label>
-        <br />
-        <select class="maxw100" name="service" id="service" required>
-          <option value="room" selected>Full Room</option>
-          <option value="walls">Walls Only</option>
-          <option value="ceiling">Ceiling Only</option>
-          <option value="woodwork">Woodwork Only</option>
-        </select>
-        <br />
-        <!-- condition type options -->
-        <label class="bold mt" for="condition">Condition</label>
-        <br />
-        <select class="maxw100" name="condition" id="condition" required>
-          <option value="good" selected>Good</option>
-          <option value="average">Average</option>
-          <option value="bad">Bad</option>
-        </select>
-        <br />
-        <!-- finish type options -->
-        <label class="bold" for="finish">Finish</label>
-        <br />
-        <select class="maxw100" name="finish" id="finish" required>
-          <option value="hand" selected>Hand Painted</option>
-          <option value="spray">Spray Painted</option>
-          <option value="wallpaper">Wallpaper</option>
-        </select>
-        <br />
-        <!-- floor type options -->
-        <p class="m mt">Floor protection required?</p>
-        <label>
-          <input type="checkbox" name="floor" value="yes" />
-          Yes
-        </label>
-        <br />
-        <!-- wallpaper type options -->
-        <p class="m mt">Wallpaper to be removed?</p>
-        <label>
-          <input type="checkbox" name="paper" value="yes" />
-          Yes
-        </label>
-        <br />
-        <!-- plaster type options -->
-        <p class="m mt">Bare plaster?</p>
-        <label>
-          <input type="checkbox" name="plaster" value="yes" />
-          Yes
-        </label>
-        <br />
-        <!-- wood type options -->
-        <p class="m mt">Bare wood?</p>
-        <label>
-          <input type="checkbox" name="wood" value="yes" />
-          Yes
-        </label>
-        <br />
-        <!-- mould option -->
-        <p class="m mt">Mould?</p>
-        <label>
-          <input type="checkbox" name="mould" value="yes" />
-          Yes
-        </label>
+        <div id="room-list"></div>
         <p class="m mt bold">Enter Amount:</p>
         <!-- number of doors -->
         <div class="sb">
@@ -264,24 +256,7 @@
             required
           />
         </div>
-        <!-- trims -->
-        <p class="m t">Trims</p>
-        <label>
-          <input class="mt" type="checkbox" name="coving" value="coving" />
-          Coving
-        </label>
-        <br />
-        <label>
-          <input class="mt" type="checkbox" name="picture" value="picture" />
-          Picture Rail
-        </label>
-        <br />
-        <label>
-          <input class="mt" type="checkbox" name="dado" value="dado" />
-          Dado Rail
-        </label>
-        <br />
-        <p class="m t mt">Stairs</p>
+        <p class="m mt">Banisters?</p>
         <label>
           <input
             name="banister"
@@ -290,8 +265,8 @@
             value="banister"
             onchange="toggleBanisterOptions()"
           />
-          Banisters?
-        </label>
+          Yes</label
+        >
         <div id="banisterOptions" style="display: none; margin-top: 10px">
           <p class="m bold">Enter Amount:</p>
           <div class="sb">
@@ -338,7 +313,7 @@
         <br />
         <!-- <p>Prices are inclusive of vat</p> -->
         <div class="mt">Price: <span id="result"></span></div>
-        <div>Price Vat: <span id="result-vat"></span></div>
+        <div>Price inc Vat: <span id="result-vat"></span></div>
         <button class="btn mt" type="submit">Estimate Price</button>
       </form>
     </div>
@@ -350,109 +325,274 @@
     </div>
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
-      document
-        .getElementById("price-estimator")
-        .addEventListener("submit", function (event) {
-          event.preventDefault(); // Prevent the default form submission
 
-          // price values
-          const wallOnlyPricePerSqM = 5;
-          const ceillingOnlyPricePerSqM = 5;
-          const woodOnlyPricePerSqM = 4;
-          const goodPrice = 1; // price is deducted
-          const averagePrice = 0;
-          const badPrice = 1;
-          const sprayPricePerSqM = 1;
-          const wallpaperPricePerSqM = 1;
-          const floorPrice = 1;
-          const wallpaperRemovePricePerSqM = 0.5;
-          const barePlasterPricePerSqM = 0.5;
-          const bareWoodPricePerSqM = 0.5;
-          const doorPrice = 30;
-          const doorframesPrice = 10;
-          const windowPrice = 40;
-          const cillsPrice = 10;
-          const radiatorPrice = 15;
-          const mouldPrice = 100;
-          const covingPricePerSqM = 0.1;
-          const picturePricePerSqM = 0.1;
-          const dadoPricePerSqM = 0.1;
-          const spindlesPrice = 3;
-          const newelPostsPrice = 3;
-          const handrailPricePerM = 3;
-          const wallMaterialPricePerSqM = 0.5;
-          const ceilingMaterialPricePerSqM = 0.5;
-          const woodMaterialPricePerSqM = 0.8;
-          const minCharge = 200;
-          const materialsMinCharge = 50;
-          const vat = 1.2;
+      const roomList = document.getElementById("room-list");
+      const addRoomButton = document.getElementById("add-room");
+      const roomNameInput = document.getElementById("room-name");
+      const tooltip = document.getElementById("tooltip");
+      const priceEstimatorForm = document.getElementById("price-estimator");
+      // Parent container where all rooms are added
+      const roomContainer = document.getElementById("room-list");
 
-          const length = parseFloat(document.getElementById("length").value);
-          const width = parseFloat(document.getElementById("width").value);
-          const height = parseFloat(document.getElementById("height").value);
-          const doors = parseInt(document.getElementById("doors").value);
-          const frames = parseInt(document.getElementById("frames").value);
-          const windows = parseInt(document.getElementById("windows").value);
-          const radiators = parseInt(
-            document.getElementById("radiators").value
+      // Event Delegation: Attach one event listener to the parent
+      function handleAccordionToggle(event) {
+        if (event.target.classList.contains("accordion")) {
+          event.target.classList.toggle("active");
+          const panel = event.target.nextElementSibling;
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        }
+      }
+
+      let roomCount = 0;
+      let roomArray = [];
+
+      function handleAddRoomButton() {
+        const roomName = roomNameInput.value.trim();
+
+        if (roomName === "") {
+          tooltip.classList.add("invalid");
+          roomNameInput.style.border = "1px solid red";
+          setTimeout(() => {
+            tooltip.classList.remove("invalid");
+            roomNameInput.style.border = "none";
+          }, 3000);
+          return;
+        }
+
+        const uId = `0x${++roomCount}`;
+        const roomAccordion = document.createElement("button");
+        const panel = document.createElement("div");
+
+        roomArray.push(uId);
+
+        // Create Accordion Button
+        roomAccordion.className = "accordion bold";
+        roomAccordion.type = "button";
+        roomAccordion.id = `accordion-${uId}`;
+        roomAccordion.textContent = `${roomName}`;
+
+        // Create Panel Content
+        panel.className = "panel";
+        panel.id = `panel-${uId}`;
+
+        panel.innerHTML = `
+                  <div class="sb">
+                    <label for="length-${uId}">Length:</label>
+                    <div>
+                      <input class="maxw60" type="number" id="length-${uId}" name="length-${uId}" min="0" value="2.0" step="any" required /> m
+                    </div>
+                  </div>
+
+                  <div class="sb">
+                    <label for="width-${uId}">Width:</label>
+                    <div>
+                      <input class="maxw60" type="number" id="width-${uId}" name="width-${uId}" min="0" value="2.0" step="any" required /> m
+                    </div>
+                  </div>
+
+                  <div class="sb">
+                    <label for="height-${uId}">Height:</label>
+                    <div>
+                      <input class="maxw60" type="number" id="height-${uId}" name="height-${uId}" min="0" value="2.0" step="any" required /> m
+                    </div>
+                  </div>
+
+                  <div class="mt">
+                    <label class="bold" for="service-${uId}">Select Service</label>
+                    <br/>
+                    <select class="maxw100" name="service-${uId}" id="service-${uId}" required>
+                      <option value="room" selected>Full Room</option>
+                      <option value="walls">Walls Only</option>
+                      <option value="ceiling">Ceiling Only</option>
+                      <option value="woodwork">Woodwork Only</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="bold" for="condition-${uId}">Condition</label>
+                    <br/>
+                    <select class="maxw100" name="condition-${uId}" id="condition-${uId}" required>
+                      <option value="good" selected>Good</option>
+                      <option value="average">Average</option>
+                      <option value="bad">Bad</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="bold" for="finish-${uId}">Finish</label>
+                    <br/>
+                    <select class="maxw100" name="finish-${uId}" id="finish-${uId}" required>
+                      <option value="hand" selected>Hand Painted</option>
+                      <option value="spray">Spray Painted</option>
+                      <option value="wallpaper">Wallpaper</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <p class="m mt">Floor protection required?</p>
+                    <label>
+                      <input type="checkbox" id="floor-${uId}" name="floor-${uId}" value="yes" />
+                      Yes
+                    </label>
+                  </div>
+
+                  <div>
+                    <p class="m mt">Wallpaper to be removed?</p>
+                    <label>
+                      <input type="checkbox" id="paper-${uId}" name="paper-${uId}" value="yes" />
+                      Yes
+                    </label>
+                  </div>
+
+                  <div>
+                    <p class="m mt">Bare plaster?</p>
+                    <label>
+                      <input type="checkbox" id="plaster-${uId}" name="plaster-${uId}" value="yes" />
+                      Yes
+                    </label>
+                  </div>
+
+                  <div>
+                    <p class="m mt">Bare wood?</p>
+                    <label>
+                      <input type="checkbox" id="wood-${uId}" name="wood-${uId}" value="yes" />
+                      Yes
+                    </label>
+                  </div>
+
+                  <div>
+                    <p class="m mt">Mould?</p>
+                    <label>
+                      <input type="checkbox" id="mould-${uId}" name="mould-${uId}" value="yes" />
+                      Yes
+                    </label>
+                  </div>
+
+                  <div>
+                    <p class="m t">Trims</p>
+                    <label>
+                      <input class="mt" type="checkbox" id="coving-${uId}" name="coving-${uId}" value="coving" />
+                      Coving
+                    </label><br />
+
+                    <label>
+                      <input class="mt" type="checkbox" id="picture-${uId}" name="picture-${uId}" value="picture" />
+                      Picture Rail
+                    </label><br />
+
+                    <label>
+                      <input class="mt" type="checkbox" id="dado-${uId}" name="dado-${uId}" value="dado" />
+                      Dado Rail
+                    </label>
+                  </div>
+
+                  <button onclick="removeRoom('${uId}')" class="btn-r mt">Remove Room</button>
+                `;
+
+        roomList.appendChild(roomAccordion);
+        roomList.appendChild(panel);
+
+        roomNameInput.value = ""; // Clear input
+      }
+
+      // Function to remove the room
+      function removeRoom(uId) {
+        const roomAccordion = document.getElementById(`accordion-${uId}`);
+        const roomPanel = document.getElementById(`panel-${uId}`);
+
+        roomAccordion.remove();
+        roomPanel.remove();
+
+        // Remove from the roomArray
+        roomArray = roomArray.filter((id) => id !== uId);
+      }
+
+      // Form body function
+      function handleFormSubmit() {
+        event.preventDefault(); // Prevent the default form submission
+
+        // price values
+        const wallOnlyPricePerSqM = 5;
+        const ceillingOnlyPricePerSqM = 5;
+        const woodOnlyPricePerSqM = 4;
+        const goodPrice = 1; // price is deducted
+        const averagePrice = 0;
+        const badPrice = 1;
+        const sprayPricePerSqM = 1;
+        const wallpaperPricePerSqM = 1;
+        const floorPrice = 1;
+        const wallpaperRemovePricePerSqM = 0.5;
+        const barePlasterPricePerSqM = 0.5;
+        const bareWoodPricePerSqM = 0.5;
+        const doorPrice = 30;
+        const doorframesPrice = 10;
+        const windowPrice = 40;
+        const cillsPrice = 10;
+        const radiatorPrice = 15;
+        const mouldPrice = 100;
+        const covingPricePerSqM = 0.1;
+        const picturePricePerSqM = 0.1;
+        const dadoPricePerSqM = 0.1;
+        const spindlesPrice = 3;
+        const newelPostsPrice = 3;
+        const handrailPricePerM = 3;
+        const wallMaterialPricePerSqM = 0.5;
+        const ceilingMaterialPricePerSqM = 0.5;
+        const woodMaterialPricePerSqM = 0.8;
+        const minCharge = 200;
+        const materialsMinCharge = 50;
+        const vat = 1.2;
+
+        // Helper variables
+        const val = (selector) => document.querySelector(selector)?.value || "";
+        const checkedVal = (name) =>
+          document.querySelector(`input[name="${name}"]:checked`)?.value || "";
+
+        const doors = parseInt(document.getElementById("doors").value);
+        const frames = parseInt(document.getElementById("frames").value);
+        const windows = parseInt(document.getElementById("windows").value);
+        const radiators = parseInt(document.getElementById("radiators").value);
+        const cills = parseInt(document.getElementById("cills").value);
+        const banister = checkedVal("banister");
+        const spindles = parseInt(document.getElementById("spindles").value);
+        const newelPosts = parseInt(
+          document.getElementById("newel-posts").value
+        );
+        const handrail = parseFloat(document.getElementById("handrail").value);
+        const materials = checkedVal("materials");
+
+        let materialsCost = 0;
+        let estimate = 0;
+
+        roomArray.forEach((uId) => {
+          const length = parseFloat(
+            document.getElementById(`length-${uId}`).value
           );
-          const cills = parseInt(document.getElementById("cills").value);
-          const spindles = parseInt(document.getElementById("spindles").value);
-          const newelPosts = parseInt(
-            document.getElementById("newel-posts").value
+          const width = parseFloat(
+            document.getElementById(`width-${uId}`).value
           );
-          const handrail = parseInt(document.getElementById("handrail").value);
-          const service = document.querySelector(
-            'select[name="service"]'
-          ).value;
-          const condition = document.querySelector(
-            'select[name="condition"]'
-          ).value;
-          const finish = document.querySelector('select[name="finish"]').value;
-          const floor = document.querySelector('input[name="floor"]:checked')
-            ? document.querySelector('input[name="floor"]:checked').value
-            : "";
-          const paper = document.querySelector('input[name="paper"]:checked')
-            ? document.querySelector('input[name="paper"]:checked').value
-            : "";
-          const plaster = document.querySelector(
-            'input[name="plaster"]:checked'
-          )
-            ? document.querySelector('input[name="plaster"]:checked').value
-            : "";
-          const wood = document.querySelector('input[name="wood"]:checked')
-            ? document.querySelector('input[name="wood"]:checked').value
-            : "";
-          const mould = document.querySelector('input[name="mould"]:checked')
-            ? document.querySelector('input[name="mould"]:checked').value
-            : "";
-          const coving = document.querySelector('input[name="coving"]:checked')
-            ? document.querySelector('input[name="coving"]:checked').value
-            : "";
-          const picture = document.querySelector(
-            'input[name="picture"]:checked'
-          )
-            ? document.querySelector('input[name="picture"]:checked').value
-            : "";
-          const dado = document.querySelector('input[name="dado"]:checked')
-            ? document.querySelector('input[name="dado"]:checked').value
-            : "";
-          const banister = document.querySelector(
-            'input[name="banister"]:checked'
-          )
-            ? document.querySelector('input[name="banister"]:checked').value
-            : "";
-          const materials = document.querySelector(
-            'input[name="materials"]:checked'
-          )
-            ? document.querySelector('input[name="materials"]:checked').value
-            : "";
+          const height = parseFloat(
+            document.getElementById(`height-${uId}`).value
+          );
+          const service = val(`select[name="service-${uId}"]`);
+          const condition = val(`select[name="condition-${uId}"]`);
+          const finish = val(`select[name="finish-${uId}"]`);
+          const floor = checkedVal(`floor-${uId}`);
+          const paper = checkedVal(`paper-${uId}`);
+          const plaster = checkedVal(`plaster-${uId}`);
+          const wood = checkedVal(`wood-${uId}`);
+          const mould = checkedVal(`mould-${uId}`);
+          const coving = checkedVal(`coving-${uId}`);
+          const picture = checkedVal(`picture-${uId}`);
+          const dado = checkedVal(`dado-${uId}`);
 
           let area = length * width;
           let parimeter = 2 * (length + width);
           let surfaceArea = (length * 2 + width * 2) * height;
-          let estimate = 0;
-          let materialsCost = 0;
 
           // full room
           if (service === "room") {
@@ -550,7 +690,6 @@
             }
             if (materials === "yes") {
               materialsCost += parimeter * woodMaterialPricePerSqM;
-              console.log("wood materials = ", materialsCost);
             }
           }
 
@@ -566,33 +705,35 @@
           if (mould === "yes") {
             estimate += mouldPrice;
           }
-
-          estimate += doors * doorPrice;
-          estimate += frames * doorframesPrice;
-          estimate += windows * windowPrice;
-          estimate += cills * cillsPrice;
-          estimate += radiators * radiatorPrice;
-
-          if (banister === "banister") {
-            estimate += spindles * spindlesPrice;
-            estimate += newelPosts * newelPostsPrice;
-            estimate += handrail * handrailPricePerM;
-          }
-
-          estimate = estimate < minCharge ? minCharge : estimate;
-
-          if (materials === "yes") {
-            materialsCost += materialsMinCharge;
-            estimate += materialsCost;
-          }
-
-          document.getElementById("result").textContent = `£${estimate.toFixed(
-            2
-          )}`;
-          document.getElementById("result-vat").textContent = `£${(
-            estimate * vat
-          ).toFixed(2)}`;
         });
+
+        estimate += doors * doorPrice;
+        estimate += frames * doorframesPrice;
+        estimate += windows * windowPrice;
+        estimate += cills * cillsPrice;
+        estimate += radiators * radiatorPrice;
+
+        if (banister === "banister") {
+          estimate += spindles * spindlesPrice;
+          estimate += newelPosts * newelPostsPrice;
+          estimate += handrail * handrailPricePerM;
+        }
+
+        estimate = estimate < minCharge ? minCharge : estimate;
+
+        if (materials === "yes") {
+          materialsCost += materialsMinCharge;
+          estimate += materialsCost;
+        }
+
+        document.getElementById("result").textContent = `£${estimate.toFixed(
+          2
+        )}`;
+        document.getElementById("result-vat").textContent = `£${(
+          estimate * vat
+        ).toFixed(2)}`;
+      }
+
       function toggleBanisterOptions() {
         const checkbox = document.getElementById("banisterCheckbox");
         const options = document.getElementById("banisterOptions");
@@ -602,9 +743,13 @@
           options.style.display = "none";
           document.getElementById("spindles").value = "0";
           document.getElementById("newel-posts").value = "0";
-          document.getElementById("handrail").value = "0";
+          document.getElementById("handrail").value = "0.0";
         }
       }
+
+      priceEstimatorForm.addEventListener("submit", handleFormSubmit);
+      roomContainer.addEventListener("click", handleAccordionToggle);
+      addRoomButton.addEventListener("click", handleAddRoomButton);
     </script>
   </body>
 </html>

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Price Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #e6e6e6;
+        font-style: italic;
+        font-size: 20px;
+        color: black;
+      }
+      h2 {
+        text-align: center;
+      }
+      .t {
+        text-decoration: underline;
+        font-weight: 700;
+        font-size: 22px;
+      }
+      .ma {
+        margin: auto;
+      }
+      .m {
+        margin: 5px 0;
+      }
+      .mb {
+        margin-bottom: 5px;
+      }
+      .mt {
+        margin-top: 10px;
+      }
+      .f {
+        padding: 10px 60px 10px 20px;
+        border-radius: 5px;
+        background-color: #fefefe;
+        box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.6);
+        max-width: 400px;
+      }
+      .p60 {
+        padding: 10px 60px 60px 60px;
+      }
+      .sb {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      input,
+      select {
+        background-color: #f2f2f2;
+        border-radius: 3px;
+        font-size: 20px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+        margin-bottom: 5px;
+      }
+      .maxw60 {
+        max-width: 60px;
+      }
+      .maxw100 {
+        width: 150px;
+        margin-bottom: 5px;
+      }
+      .bold {
+        font-weight: 600;
+      }
+      .btn {
+        background-color: #1e90ff;
+        font-size: 18px;
+        padding: 7px 8px;
+        border-radius: 3px;
+        border: none;
+        box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.6);
+        cursor: pointer;
+        color: #f2f2f2;
+      }
+      #copyright {
+        text-align: center;
+        font-size: 16px;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h2 class="m">Price Calculator</h2>
+      <form id="price-estimator" class="f ma">
+        <!-- dimensions -->
+        <p class="m t mb">Room Size</p>
+        <div class="sb">
+          <label for="length">Length:</label>
+          <div>
+            <input
+              class="maxw60"
+              type="number"
+              id="length"
+              name="length"
+              min="0"
+              value="2.0"
+              step="any"
+              required
+            />
+            m
+          </div>
+        </div>
+        <div class="sb">
+          <label for="width">Width:</label>
+          <div>
+            <input
+              class="maxw60"
+              type="number"
+              id="width"
+              name="width"
+              min="0"
+              value="2.0"
+              step="any"
+              required
+            />
+            m
+          </div>
+        </div>
+        <div class="sb mb">
+          <label for="height">Height:</label>
+          <div>
+            <input
+              class="maxw60"
+              type="number"
+              id="height"
+              name="height"
+              min="0"
+              value="2.0"
+              step="any"
+              required
+            />
+            m
+          </div>
+        </div>
+        <!-- service type options -->
+        <label class="bold" for="service">Select Service</label>
+        <br />
+        <select class="maxw100" name="service" id="service" required>
+          <option value="room" selected>Full Room</option>
+          <option value="walls">Walls Only</option>
+          <option value="ceiling">Ceiling Only</option>
+          <option value="woodwork">Woodwork Only</option>
+        </select>
+        <br />
+        <!-- condition type options -->
+        <label class="bold mt" for="condition">Condition</label>
+        <br />
+        <select class="maxw100" name="condition" id="condition" required>
+          <option value="good" selected>Good</option>
+          <option value="average">Average</option>
+          <option value="bad">Bad</option>
+        </select>
+        <br />
+        <!-- finish type options -->
+        <label class="bold" for="finish">Finish</label>
+        <br />
+        <select class="maxw100" name="finish" id="finish" required>
+          <option value="hand" selected>Hand Painted</option>
+          <option value="spray">Spray Painted</option>
+          <option value="wallpaper">Wallpaper</option>
+        </select>
+        <br />
+        <!-- floor type options -->
+        <p class="m mt">Floor protection required?</p>
+        <label>
+          <input type="checkbox" name="floor" value="yes" />
+          Yes
+        </label>
+        <br />
+        <!-- wallpaper type options -->
+        <p class="m mt">Wallpaper to be removed?</p>
+        <label>
+          <input type="checkbox" name="paper" value="yes" />
+          Yes
+        </label>
+        <br />
+        <!-- plaster type options -->
+        <p class="m mt">Bare plaster?</p>
+        <label>
+          <input type="checkbox" name="plaster" value="yes" />
+          Yes
+        </label>
+        <br />
+        <!-- wood type options -->
+        <p class="m mt">Bare wood?</p>
+        <label>
+          <input type="checkbox" name="wood" value="yes" />
+          Yes
+        </label>
+        <br />
+        <!-- mould option -->
+        <p class="m mt">Mould?</p>
+        <label>
+          <input type="checkbox" name="mould" value="yes" />
+          Yes
+        </label>
+        <p class="m mt bold">Enter Amount:</p>
+        <!-- number of doors -->
+        <div class="sb">
+          <label for="doors">Doors</label>
+          <input
+            class="maxw60"
+            type="number"
+            id="doors"
+            name="doors"
+            min="0"
+            value="0"
+            required
+          />
+        </div>
+        <!-- number of door frames -->
+        <div class="sb">
+          <label for="frames">Doorframes</label>
+          <input
+            class="maxw60"
+            type="number"
+            id="frames"
+            name="frames"
+            min="0"
+            value="0"
+            required
+          />
+        </div>
+        <!-- number of windows -->
+        <div class="sb">
+          <label for="doors">Windows</label>
+          <input
+            class="maxw60"
+            type="number"
+            id="windows"
+            name="windows"
+            min="0"
+            value="0"
+            required
+          />
+        </div>
+        <!-- number of window cills -->
+        <div class="sb">
+          <label for="doors">Window Cills</label>
+          <input
+            class="maxw60"
+            type="number"
+            id="cills"
+            name="cills"
+            min="0"
+            value="0"
+            required
+          />
+        </div>
+        <!-- number of radiators -->
+        <div class="sb">
+          <label for="doors">Radiators</label>
+          <input
+            class="maxw60"
+            type="number"
+            id="radiators"
+            name="radiators"
+            min="0"
+            value="0"
+            required
+          />
+        </div>
+        <!-- trims -->
+        <p class="m t">Trims</p>
+        <label>
+          <input class="mt" type="checkbox" name="coving" value="coving" />
+          Coving
+        </label>
+        <br />
+        <label>
+          <input class="mt" type="checkbox" name="picture" value="picture" />
+          Picture Rail
+        </label>
+        <br />
+        <label>
+          <input class="mt" type="checkbox" name="dado" value="dado" />
+          Dado Rail
+        </label>
+        <br />
+        <p class="m t mt">Stairs</p>
+        <label>
+          <input
+            name="banister"
+            type="checkbox"
+            id="banisterCheckbox"
+            value="banister"
+            onchange="toggleBanisterOptions()"
+          />
+          Banisters?
+        </label>
+        <div id="banisterOptions" style="display: none; margin-top: 10px">
+          <p class="m bold">Enter Amount:</p>
+          <div class="sb">
+            <label class="minw80">Spindles</label>
+            <input
+              class="maxw60"
+              type="number"
+              id="spindles"
+              min="0"
+              value="0"
+              required
+            />
+          </div>
+          <div class="sb">
+            <label class="minw80">Newel Posts</label>
+            <input
+              class="maxw60"
+              type="number"
+              id="newel-posts"
+              min="0"
+              value="0"
+              required
+            />
+          </div>
+          <div class="sb">
+            <label>Handrail (m)</label>
+            <input
+              class="maxw60"
+              type="number"
+              id="handrail"
+              min="0"
+              value="0.0"
+              step="any"
+              required
+            />
+          </div>
+        </div>
+        <!-- material option -->
+        <p class="m mt">Include materials?</p>
+        <label>
+          <input type="checkbox" name="materials" value="yes" />
+          Yes
+        </label>
+        <br />
+        <!-- <p>Prices are inclusive of vat</p> -->
+        <div class="mt">Price: <span id="result"></span></div>
+        <div>Price Vat: <span id="result-vat"></span></div>
+        <button class="btn mt" type="submit">Estimate Price</button>
+      </form>
+    </div>
+    <div>
+      <p id="copyright">
+        Copyright &copy; <span id="year"></span> Your Company Name. All rights
+        reserved.
+      </p>
+    </div>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+      document
+        .getElementById("price-estimator")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent the default form submission
+
+          // price values
+          const wallOnlyPricePerSqM = 5;
+          const ceillingOnlyPricePerSqM = 5;
+          const woodOnlyPricePerSqM = 4;
+          const goodPrice = 1; // price is deducted
+          const averagePrice = 0;
+          const badPrice = 1;
+          const sprayPricePerSqM = 1;
+          const wallpaperPricePerSqM = 1;
+          const floorPrice = 1;
+          const wallpaperRemovePricePerSqM = 0.5;
+          const barePlasterPricePerSqM = 0.5;
+          const bareWoodPricePerSqM = 0.5;
+          const doorPrice = 30;
+          const doorframesPrice = 10;
+          const windowPrice = 40;
+          const cillsPrice = 10;
+          const radiatorPrice = 15;
+          const mouldPrice = 100;
+          const covingPricePerSqM = 0.1;
+          const picturePricePerSqM = 0.1;
+          const dadoPricePerSqM = 0.1;
+          const spindlesPrice = 3;
+          const newelPostsPrice = 3;
+          const handrailPricePerM = 3;
+          const wallMaterialPricePerSqM = 0.5;
+          const ceilingMaterialPricePerSqM = 0.5;
+          const woodMaterialPricePerSqM = 0.8;
+          const minCharge = 200;
+          const materialsMinCharge = 50;
+          const vat = 1.2;
+
+          const length = parseFloat(document.getElementById("length").value);
+          const width = parseFloat(document.getElementById("width").value);
+          const height = parseFloat(document.getElementById("height").value);
+          const doors = parseInt(document.getElementById("doors").value);
+          const frames = parseInt(document.getElementById("frames").value);
+          const windows = parseInt(document.getElementById("windows").value);
+          const radiators = parseInt(
+            document.getElementById("radiators").value
+          );
+          const cills = parseInt(document.getElementById("cills").value);
+          const spindles = parseInt(document.getElementById("spindles").value);
+          const newelPosts = parseInt(
+            document.getElementById("newel-posts").value
+          );
+          const handrail = parseInt(document.getElementById("handrail").value);
+          const service = document.querySelector(
+            'select[name="service"]'
+          ).value;
+          const condition = document.querySelector(
+            'select[name="condition"]'
+          ).value;
+          const finish = document.querySelector('select[name="finish"]').value;
+          const floor = document.querySelector('input[name="floor"]:checked')
+            ? document.querySelector('input[name="floor"]:checked').value
+            : "";
+          const paper = document.querySelector('input[name="paper"]:checked')
+            ? document.querySelector('input[name="paper"]:checked').value
+            : "";
+          const plaster = document.querySelector(
+            'input[name="plaster"]:checked'
+          )
+            ? document.querySelector('input[name="plaster"]:checked').value
+            : "";
+          const wood = document.querySelector('input[name="wood"]:checked')
+            ? document.querySelector('input[name="wood"]:checked').value
+            : "";
+          const mould = document.querySelector('input[name="mould"]:checked')
+            ? document.querySelector('input[name="mould"]:checked').value
+            : "";
+          const coving = document.querySelector('input[name="coving"]:checked')
+            ? document.querySelector('input[name="coving"]:checked').value
+            : "";
+          const picture = document.querySelector(
+            'input[name="picture"]:checked'
+          )
+            ? document.querySelector('input[name="picture"]:checked').value
+            : "";
+          const dado = document.querySelector('input[name="dado"]:checked')
+            ? document.querySelector('input[name="dado"]:checked').value
+            : "";
+          const banister = document.querySelector(
+            'input[name="banister"]:checked'
+          )
+            ? document.querySelector('input[name="banister"]:checked').value
+            : "";
+          const materials = document.querySelector(
+            'input[name="materials"]:checked'
+          )
+            ? document.querySelector('input[name="materials"]:checked').value
+            : "";
+
+          let area = length * width;
+          let parimeter = 2 * (length + width);
+          let surfaceArea = (length * 2 + width * 2) * height;
+          let estimate = 0;
+          let materialsCost = 0;
+
+          // full room
+          if (service === "room") {
+            estimate += surfaceArea * wallOnlyPricePerSqM;
+            estimate += area * ceillingOnlyPricePerSqM;
+            estimate += parimeter * woodOnlyPricePerSqM;
+            if (finish === "spray") {
+              estimate += surfaceArea * sprayPricePerSqM;
+              estimate += area * sprayPricePerSqM;
+              estimate += parimeter * sprayPricePerSqM;
+            } else if (finish === "wallpaper") {
+              estimate += surfaceArea * wallpaperPricePerSqM;
+            }
+            if (floor === "yes") {
+              estimate += area * floorPrice;
+            }
+            if (paper === "yes") {
+              estimate += surfaceArea * wallpaperRemovePricePerSqM;
+            }
+            if (plaster === "yes") {
+              estimate += surfaceArea * barePlasterPricePerSqM;
+            }
+            if (wood === "yes") {
+              estimate += parimeter * bareWoodPricePerSqM;
+            }
+            if (coving === "coving") {
+              estimate += parimeter * covingPricePerSqM;
+            }
+            if (picture === "picture") {
+              estimate += parimeter * picturePricePerSqM;
+            }
+            if (dado === "dado") {
+              estimate += parimeter * dadoPricePerSqM;
+            }
+            if (materials === "yes") {
+              materialsCost += surfaceArea * wallMaterialPricePerSqM;
+              materialsCost += area * ceilingMaterialPricePerSqM;
+              materialsCost += parimeter * woodMaterialPricePerSqM;
+            }
+            // walls only
+          } else if (service === "walls") {
+            estimate += surfaceArea * wallOnlyPricePerSqM;
+            if (finish === "spray") {
+              estimate += surfaceArea * sprayPricePerSqM;
+            } else if (finish === "wallpaper") {
+              estimate += surfaceArea * wallpaperPricePerSqM;
+            }
+            if (floor === "yes") {
+              estimate += area * floorPrice;
+            }
+            if (paper === "yes") {
+              estimate += surfaceArea * wallpaperRemovePricePerSqM;
+            }
+            if (plaster === "yes") {
+              estimate += surfaceArea * barePlasterPricePerSqM;
+            }
+            if (materials === "yes") {
+              materialsCost += surfaceArea * wallMaterialPricePerSqM;
+            }
+            // ceiling only
+          } else if (service === "ceiling") {
+            estimate += area * ceillingOnlyPricePerSqM;
+            if (finish === "spray") {
+              estimate += area * sprayPricePerSqM;
+            }
+            if (floor === "yes") {
+              estimate += area * floorPrice;
+            }
+            if (plaster === "yes") {
+              estimate += area * barePlasterPricePerSqM;
+            }
+            if (materials === "yes") {
+              materialsCost += area * ceilingMaterialPricePerSqM;
+            }
+            // woodwork only
+          } else if (service === "woodwork") {
+            estimate += parimeter * woodOnlyPricePerSqM;
+            if (finish === "spray") {
+              estimate += parimeter * sprayPricePerSqM;
+              if (floor === "yes") {
+                estimate += area * floorPrice;
+              }
+            }
+            if (coving === "coving") {
+              estimate += parimeter * covingPricePerSqM;
+            }
+            if (picture === "picture") {
+              estimate += parimeter * picturePricePerSqM;
+            }
+            if (dado === "dado") {
+              estimate += parimeter * dadoPricePerSqM;
+            }
+            if (wood === "yes") {
+              estimate += parimeter * bareWoodPricePerSqM;
+            }
+            if (materials === "yes") {
+              materialsCost += parimeter * woodMaterialPricePerSqM;
+              console.log("wood materials = ", materialsCost);
+            }
+          }
+
+          // condition price adjustments
+          if (condition === "good") {
+            estimate -= area * goodPrice;
+          } else if (condition === "average") {
+            estimate += area * averagePrice;
+          } else if (condition === "bad") {
+            estimate += area * badPrice;
+          }
+
+          if (mould === "yes") {
+            estimate += mouldPrice;
+          }
+
+          estimate += doors * doorPrice;
+          estimate += frames * doorframesPrice;
+          estimate += windows * windowPrice;
+          estimate += cills * cillsPrice;
+          estimate += radiators * radiatorPrice;
+
+          if (banister === "banister") {
+            estimate += spindles * spindlesPrice;
+            estimate += newelPosts * newelPostsPrice;
+            estimate += handrail * handrailPricePerM;
+          }
+
+          estimate = estimate < minCharge ? minCharge : estimate;
+
+          if (materials === "yes") {
+            materialsCost += materialsMinCharge;
+            estimate += materialsCost;
+          }
+
+          document.getElementById("result").textContent = `£${estimate.toFixed(
+            2
+          )}`;
+          document.getElementById("result-vat").textContent = `£${(
+            estimate * vat
+          ).toFixed(2)}`;
+        });
+      function toggleBanisterOptions() {
+        const checkbox = document.getElementById("banisterCheckbox");
+        const options = document.getElementById("banisterOptions");
+        if (checkbox.checked) {
+          options.style.display = "block";
+        } else {
+          options.style.display = "none";
+          document.getElementById("spindles").value = "0";
+          document.getElementById("newel-posts").value = "0";
+          document.getElementById("handrail").value = "0";
+        }
+      }
+    </script>
+  </body>
+</html>
